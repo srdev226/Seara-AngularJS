@@ -1,0 +1,122 @@
+
+<div class="register-container">
+
+	<div class="home-logo">
+	</div>
+		
+	<div class="register-form-container">
+	<form name="formRegister"  class="form-register" ng-submit="register()" novalidate>
+		<div class="dialog-form">
+			<h2 class="header">Registration</h2>
+
+			<div class="form-group" ng-class="{'has-error': formRegister.firstName.$invalid &amp;&amp; formRegister.firstName.$dirty}">
+				<label>FIRST NAME</label>
+				<input type="text" name="firstName" class="form-control"  ng-model="user.first_name" maxlength=50 required ng-pattern="/^[a-z0-9\s]+$/i">
+				<p style="position:absolute;" ng-show="formRegister.firstName.$dirty">
+					{{
+						formRegister.firstName.$error.required? 'First name is required' :
+						formRegister.firstName.$error.pattern? 'Cannot use special characters' : ''
+					}}
+				</p>
+			</div>
+
+			<div class="form-group" ng-class="{'has-error': formRegister.lastName.$invalid &amp;&amp; formRegister.lastName.$dirty}">
+				<label>LAST NAME</label>
+				<input type="text" name="lastName" class="form-control" ng-model="user.last_name" maxlength=50 required ng-pattern="/^[a-z0-9\s]+$/i">
+				<p style="position:absolute;" ng-show="formRegister.lastName.$dirty">
+					{{
+						formRegister.lastName.$error.required? 'Last name is required' :
+						formRegister.lastName.$error.pattern? 'Cannot use special characters' : ''
+					}}
+				</p>
+			</div>
+
+			<div class="form-group" ng-class="{'has-error': formRegister.jobTitle.$invalid &amp;&amp; formRegister.jobTitle.$dirty}">
+				<label>JOB TITLE (as on business card)</label>
+				<input type="text"  name="jobTitle" class="form-control" ng-model="user.job_title" maxlength=50 ng-pattern="/^[a-z0-9\s]+$/i"/>
+				<p style="position:absolute;" ng-show="formRegister.jobTitle.$dirty">
+					{{
+						formRegister.jobTitle.$error.pattern? 'Cannot use special characters' : ''
+					}}
+				</p>
+			</div>
+
+			<div class="form-group">
+				<label>OFFICE LOCATION</label>
+				<div class="style-select">
+					<div class="select-arrow"></div>
+					<select class="form-control"  name="officeLocation" ng-model="user.office_location_id" ng-options="officeLocation.id as officeLocation.name for officeLocation in officeLocations">
+						<option value="">Not selected</option>
+					</select>
+				</div>
+			</div>
+<!-- 
+
+			<div class="form-group">
+				<label>OFFICE LOCATION</label>
+					<select class="form-control" name="officeLocation" ng-model="user.office_location_id" ng-options="officeLocation.id as officeLocation.name for officeLocation in officeLocations">
+						<option value="">Not selected</option>
+					</select>
+			</div> -->
+
+			<div class="form-group" ng-class="{'has-error': formRegister.email.$invalid &amp;&amp; formRegister.email.$dirty}">
+				<label>E-MAIL ADDRESS</label>
+				<input type="email" name="email" class="form-control"  ng-model="user.email" maxlength=100 required ng-pattern="/^[^@]+@[^@\.]+\.[^@\.]+$/">
+				<p style="position:absolute;" ng-show="formRegister.email.$dirty">
+					{{
+						formRegister.email.$error.required? 'E-mail is required' :
+						formRegister.email.$error.pattern? 'E-mail is not valid' :
+						emailNotMatch? 'Confirm e-mail does not match' : ''
+					}}
+				</p>
+			</div>
+
+			<div class="form-group" ng-class="{'has-error': formRegister.confirmEmail.$invalid &amp;&amp; formRegister.confirmEmail.$dirty}">
+				<label>REPEAT E-MAIL ADDRESS</label>
+				<input type="email" name="confirmEmail" class="form-control" ng-model="confirmEmail" required>
+				<p style="position:absolute;" ng-show="formRegister.confirmEmail.$dirty">
+					{{
+						formRegister.confirmEmail.$error.required? 'Repeat the same e-mail' :
+						formRegister.confirmEmail.$error.email? 'E-mail is not valid' : ''
+					}}
+				</p>
+			</div>
+
+			<div class="form-group" ng-class="{'has-error': formRegister.password.$invalid &amp;&amp; formRegister.password.$dirty}">
+				<label>CHOOSE A PASSWORD</label>
+				<input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength=6 maxlength=20 required ng-pattern="/^[^\s]*$/" ng-trim="false">
+				<p style="position:absolute;" ng-show="formRegister.password.$dirty">
+					{{
+						formRegister.password.$error.required? 'Password is required' :
+						formRegister.password.$error.minlength? 'Password must be 6-20 characters' : 
+						formRegister.password.$error.pattern? 'Password cannot contain blank space' :
+						passwordNotMatch? 'Confirm password does not match' : ''
+					}}
+				</p>
+			</div>
+
+			<div class="form-group" ng-class="{'has-error': formRegister.confirmPassword.$invalid &amp;&amp; formRegister.confirmPassword.$dirty}">
+				<label>CONFIRM PASSWORD</label>
+				<input type="password" name="confirmPassword" class="form-control" ng-model="confirmPassword" repeat-password="user.password" ng-minlength=6 maxlength=20 required ng-pattern="/^[^\s]*$/" ng-trim="false">
+				<p style="position:absolute;" ng-show="formRegister.confirmPassword.$dirty">
+					{{
+						formRegister.confirmPassword.$error.required? 'Repeat the same password' :
+						formRegister.confirmPassword.$error.minlength? 'Password must be 6-20 characters' : 
+						formRegister.confirmPassword.$error.pattern? 'Password cannot contain blank space' : ''
+					}}
+				</p>
+			</div>
+
+			<div class="clearfix dialog-buttons">
+			<a href="#/"><button type="button" class="btn btn-default footer half left" style=""><h3>Cancel</h3></button></a>
+			<!-- <button type="button" class="btn-default" ng-click="cancel()">CANCEL</button> DOES NOT WORK--> 
+			<button type="submit" class="btn btn-default footer half right" style="" ng-disabled="formRegister.$invalid"><h3>Register</h3></button>
+			</div>
+		</div>
+	</form>
+	
+<!-- 	<button ng-click="validate()">validate</button>
+	<button ng-click="loadOffice()">loadOffice</button>
+ -->
+</div>
+</div>

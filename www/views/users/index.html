@@ -1,0 +1,58 @@
+<div class="item previous">
+	<a href="#/management">
+		<button class="btn">Back</button>
+	</a>
+</div>
+
+<div class="users-index-page">
+	<div class="search-bar hide">
+		<div class="search-bar-info">
+			<h4>search for: {{searchText}}</h4>
+		</div>
+		<button class="close-dialog-button" ng-click="clearSearch()"></button>
+	</div>
+
+	<div class="users-index-container" ng-init="getUsers()" >
+	  
+		<div class="users-view">
+			<div class="fixed-header-table-header-background"></div>
+				<div class="fixed-header-table-container">
+				<table>
+					<thead>
+						<tr>
+						<th class="col-number">
+							<div class="th-inner ">#</div>
+						</th>
+						<th class=" col-name">
+							<div class="th-inner">Name</div>
+						</th>
+						<th  class="col-location">
+							<div class="th-inner ">Location</div>
+						</th>
+						<th class="col-email">
+							<div class="th-inner ">E-Mail</div>
+						</th>
+						<th class="col-user-type">
+							<div class="th-inner">User Type</div>
+						</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr id="userRowIndex{{$index}}" ng-repeat="user in users | filter:searchText" on-touch-begin="userMouseDown(user, $index)" on-touch-end="userMouseUp()" on-touch-move="userMouseMove()" style="cursor: pointer;">
+							<td class="col-number">{{$index+1}}</td>
+							<td class="col-name overflow-helper">{{user.first_name}} {{user.last_name}}</td>
+							<td class="col-location overflow-helper">{{user.office_location_name}}</td> <!-- sent this from server, don't know how to map with json -->
+							<td class="col-email overflow-helper">{{user.email}}</td>
+				 			<td class="col-user-type">{{groups[user.group_id]}}</td>
+				 			<!-- <td class="col-user-type">{{getNameFromId(user.group_id, groups)}}</td> -->
+						</tr>
+					</tbody>
+				</table>
+				</div>
+		</div>	
+
+	</div>
+</div>
+
+<div ng-include=" 'views/modal/users_modal.html' "></div>

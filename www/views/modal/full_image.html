@@ -1,0 +1,16 @@
+<div class="show-image"> 
+  <div class="modal fade" id="showImageModal" backdrop="false" >
+    <div class="centering-helper" ng-swipe-left="nextImage()" ng-swipe-right="previousImage()">
+      <button ng-if="!inNotification" class="slide-list-scroll left" on-touch-begin="previousImage()"></button>
+      <button ng-if="!inNotification" class="slide-list-scroll right" on-touch-begin="nextImage()"></button>
+      <div class="centering-cell dark-backdrop" style="text-align: center;" >
+        <div class="full-image"></div>
+      </div>
+      <div ng-hide="">
+      <button ng-if="!inNotification" on-touch-begin="addToFavorites()" class="btn favorite not-favorited" ng-show="!selectedAssetIsFavorited"><i class="icon icon-favorites"></i></button>
+      <button ng-if="!inNotification" on-touch-begin="removeFromFavorites()" class="btn favorite" ng-show="selectedAssetIsFavorited"><i class="icon icon-favorites"></i></button>
+      <button ng-click="hideImage()" class="close-dialog-button" onmousedown="return false;"></button>
+      </div>
+    </div>
+  </div>
+</div>

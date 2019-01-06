@@ -1,0 +1,11 @@
+{
+  "name": "seara_ionic",
+  "app_id": "5b6e463d",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:3001/api/v2",
+      "_proxyUrl": "http://128.199.131.103:8081/api/v2"
+    }
+  ]
+}

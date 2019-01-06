@@ -1,0 +1,47 @@
+<div class="presentation-viewer">
+  <div class="modal fade" id="showPresentationViewerModal" backdrop="false">
+
+	  <div class="presentation-viewer-slide black-backdrop" >
+	    <button class="slide-list-scroll left" style="opacity: 0.5; z-index:9991;" on-touch-begin="previousSlide()" ng-hide="slideIndex==0"></button>
+
+
+	  	<!-- currently set class for fading AND resize in nextSlide function() -->
+	    <div id="slideContainer{{$index}}"
+	    	class="slide-container normal" ng-class="{ 'show': $index==0}"
+	      ng-swipe-left="nextSlide()"
+	      ng-swipe-right="previousSlide()"
+	      ng-repeat="presentation_slide in presentation_slides" 
+	     >
+	       <!-- <div id="slideImage{{$index}}Hotspots" class="viewer-hotspots" style="/*border: 1px solid red;*/" on-touch-begin="nextSlide($event)"></div> -->
+	       
+	      <div class="centering-helper unblocked">
+          	<div class="centering-cell" style="text-align: center;" on-touch-begin="hideImage()">
+
+              <!-- <div style="position: relative; display: table;height: 100%;"> -->
+                <img id="slideImage{{$index}}"  class="{{ slideImageOrientation[$index] }}" ng-class="{ 'with-logo': $index==0}" ng-src="{{slideImageSource[$index]}}" alt=""/>
+
+
+                <div ng-if="presentation_slide.id=='cover'" ng-show="showCover" class="presentation-cover-text"><h2>{{ presentation.title }}</h2><p>{{ presentation.description }}</p></div>
+                
+                <div ng-if="presentation_slide.id=='cover'" ng-show="showCover" class="presentation-cover-logo">
+                  <img ng-src="{{presentationLogoSource}}"/>
+                </div>
+
+              <!-- </div> -->
+          </div>
+
+        </div>
+
+
+            
+	     </div>
+
+	    <div class="slide-container end" id="slideContainer{{endOfSlideIndex}}">
+	      <h3>End of Presentation</h3>
+	    </div>
+
+      <button class="slide-list-scroll right" style="opacity: 0.5; z-index:9991;" on-touch-begin="nextSlide()"></button>
+      <button class="close-dialog-button" data-dismiss="modal" on-touch-begin="endSlide()"></button>
+    </div>
+  </div>
+</div>

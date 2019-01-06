@@ -1,0 +1,43 @@
+.register-container{
+  z-index: 9000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.register-container .home-logo {
+  position:absolute; 
+  width:100%; height:15%; 
+  top:5%;
+}
+
+.register-form-container {
+  width:100%;
+  height: 500px;
+  position: relative;
+  top: 25%;
+}
+
+.form-register {
+  width: 60%;
+  position: relative;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.register-form-container .form-group {
+  width:49.5%;
+  display: inline-block;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+@media (max-width: 660px){
+
+  .register-form-container .form-group {
+    width: 100%;
+  }
+}

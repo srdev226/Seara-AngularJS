@@ -1,0 +1,46 @@
+<div class="browser-dialog folder-browser-dialog">
+	<div class="modal fade" id="folderBrowserModal" backdrop="false">
+		<div class="centering-helper">
+			<div class="centering-cell">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="titlebar">
+				  			<div class="title">
+				      		<h2>{{dialogTitleName || ''}}</h2>
+						  		<div class="item previous">
+				  					<div class="centering-helper in-div">
+				  						<div class="centering-cell">
+												<button class="btn" on-touch-begin="folderBrowserDialogBrowse(folderBrowserDialogFolderData.parentFolder.path)" ng-show="folderBrowserDialogFolderData.parentFolder">
+													Back
+												</button>
+											</div>
+										</div>
+							  	</div>
+							  	<div class="top-bar-close-button">
+						  			<div class="centering-helper in-div">
+						  				<div class="centering-cell">
+												<button class="close-dialog-button white"data-dismiss="modal"></button>
+											</div>
+										</div>
+									</div>
+				      	</div>
+				      </div>
+				    </div>
+				    <div class="modal-body">
+							<div class="item folder" ng-repeat="folder in folderBrowserDialogFolderData.folders" ng-click="folderBrowserDialogBrowse(folder.path)">
+							<div class="icon folder"></div>
+								<p>{{folder.name}}</p>
+							</div>
+				    </div>
+				    <div class="modal-footer footer-button">
+							<button class="btn btn-default footer single" ng-click="moveAsset()">
+								<h3>Select Current Folder</h3>
+							</button>
+				    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

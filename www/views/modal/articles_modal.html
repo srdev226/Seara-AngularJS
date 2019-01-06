@@ -1,0 +1,252 @@
+<!-- Articles -->
+<div class="search-article-modal">
+  <div class="modal fade" id="searchArticleModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formSearchArticle">
+              <div class="dialog-form">
+                <h3 class="header">Search {{category || articleType}}</h3>
+                <div class="form-group">
+                  <input type="text" ng-model="$parent.articleSearchText" name="articleSearchText" class="form-control" placeholder="enter search term(s)" required/>
+                </div>
+                <button class="btn btn-default footer single" ng-click="searchArticle()" data-dismiss="modal" ng-disabled="formSearchArticle.$invalid">
+                  <h3>Search</h3>
+                </button>
+              </div>
+            </form>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="modal fade" id="articleOptionsModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog article">
+          <div class="modal-content">
+            <button class="btn btn-default" ng-click="showEditArticleDialog()" data-dismiss="modal" ng-show="canEdit">
+              <h3>Edit {{categorySingular || articleType}}</h3>
+            </button>
+            <button class="btn btn-default" ng-click="showReuploadArticleThumbnailDialog()" data-dismiss="modal" ng-show="canEdit">
+              <h3>Change Preview Image</h3>
+            </button>
+            <button class="btn btn-default" ng-click="showConfirmDeleteArticleDialog()" ng-show="canEdit">
+              <h3>Delete {{categorySingular || articleType}}</h3>
+            </button>
+            <button class="btn btn-cancel default-focus" data-dismiss="modal"><h3>Cancel</h3></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-delete">
+  <div class="modal fade" id="confirmDeleteArticleModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="dialog-message">
+                <h3 class="message message-padded">Are you sure  you want to delete ?</h3>
+                <div class="clearfix dialog-buttons">
+                  <button class="btn btn-default footer half left" ng-click="deleteArticle()" ><h3>DELETE</h3></button>
+                  <button class="btn btn-default footer half right default-focus" data-dismiss="modal"><h3>CANCEL</h3></button>
+                </div>
+              </div>
+              <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="add-article-modal">
+  <div class="modal fade" id="addArticleModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formAddArticle">
+              <div class="dialog-form">
+                <h3 class="header">Add New {{categorySingular || articleType}}</h3>
+                <div class="form-group">
+                  <input type="text" name="articleDescription" ng-model="$parent.newArticle.description" class="form-control" placeholder="{{articleTypeInDescription}} short description"/>
+                </div>
+                
+                <div class="form-group" ng-if="articleType=='E-Publication'">
+                  <h4 class="sub-header">Published date</h4>
+                  <input type="date" ng-model="newArticle.published_date" class="form-control published-date" required/>
+                </div>
+
+                <div class="form-group">
+                  <div class="file-upload-browser">
+                    <input type="text" class="form-control" ng-model="thumbnailName" placeholder="upload preview image..." required/>
+                    <button class="btn btn-default">Browse...</button>
+                    <input type="file" ng-file-select="onThumbnailSelect($files)"/>
+                  </div>
+                  <div class="file-info">
+                    <div class="centering-helper in-div">
+                      <div class="centering-cell">
+                        {{ articleType=='E-Publication'? '(160x190px)': '(145x100px)' }}<br>
+                        max size: {{ maxThumbnailSizeText }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="file-upload-browser">
+                    <input ng-disabled="disablePdf" type="text" class="form-control" ng-model="pdfName" placeholder="upload pdf file..." required/>
+                      <button ng-disabled="disablePdf" class="btn btn-default">Browse...</button>
+                    <input ng-disabled="disablePdf" type="file" ng-file-select="onPdfSelect($files)"/>
+                    </div>
+                    <div class="file-info">
+                      <div class="centering-helper in-div">
+                        <div class="centering-cell" style="padding-left: 10px;">
+                        (PDF Format)<br>
+                        max size: {{ maxPdfSizeText }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="$parent.sendNotification"> Send Notification
+                    </label>
+                  </div>
+
+                  <button class="btn btn-default footer single" ng-click="addArticle()" ng-disabled="formAddArticle.$invalid">  <h3>Upload</h3>
+                </button>
+              </div>
+            </form>
+            <!-- <div class="form-group">
+              <label>test upload with simple method to send two files at the same time:</label><input type="file"/>
+            </div> -->
+          </div>
+          <button class="close-dialog-button" data-dismiss="modal"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="edit-article-modal">
+  <div class="modal fade" id="editArticleModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formEditArticle">
+              <div class="dialog-form">
+                <h3 class="header">Change {{category || articleType}} Description</h3>
+                <div class="form-group">
+                  <input type="text" name="articleDescription" ng-model="selectedArticle.description" class="form-control" placeholder="{{articleTypeInDescription}} short description"/>
+                </div>
+
+                <div class="form-group" ng-show="articleType=='E-Publication'">
+                  <input type="date" ng-model="selectedArticle.published_date" class="form-control published-date" required/>
+                  <div class="file-info">
+                    <div class="centering-helper in-div">
+                      <div class="centering-cell"  style="padding-left: 10px;">
+                        Published date
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              <button class="btn btn-default footer single" ng-click="editArticle()">
+                <h3>Change</h3>
+              </button>
+              </div>
+              <!-- <div class="form-group">
+                <label>test upload with simple method to send two files at the same time:</label><input type="file"/>
+              </div> -->
+            </form>
+          </div>
+          <button class="close-dialog-button" data-dismiss="modal"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="edit-article-modal">
+  <div class="modal fade" id="editArticleModal" backdrop="false">
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formEditArticle">
+              <div class="dialog-form">
+                <h3 class="header">Change {{category || articleType}} Published Date</h3>
+                <div class="form-group">
+                  <input type="date" name="articlePublishedDate" ng-model="selectedArticle.published_date" class="form-control published-date" required/>
+                  <div class="info" style="position:relative; float:right; width:30%; height:34px; font-size:100%;">
+                    <div class="centering-helper in-div">
+                      <div class="centering-cell"  style="padding-left: 10px;">
+                        Published date
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <button class="btn btn-default footer single" ng-click="editArticle()">
+                <h3>Change</h3>
+              </button>
+              </div>
+              <!-- <div class="form-group">
+                <label>test upload with simple method to send two files at the same time:</label><input type="file"/>
+              </div> -->
+            </form>
+          </div>
+          <button class="close-dialog-button" data-dismiss="modal"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="reupload-article-thumbnail-modal">
+  <div class="modal fade" id="reuploadArticleThumbnailModal" backdrop="false" >
+    <div class="centering-helper"><div class="centering-cell">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form name="formReuploadArticleThumbnail">
+            <div class="dialog-form">
+              <h3 class="header">Change Preview Image</h3>
+              <div class="form-group">
+                <div class="file-upload-browser">
+                  <input type="text" class="form-control" ng-model="thumbnailName" placeholder="upload preview image..." required disabled/>
+                  <button class="btn btn-default">Browse...</button>
+                  <input type="file" ng-file-select="onThumbnailSelect($files)"/>
+                </div>
+                <div class="info" style="position:relative; float:right; width:30%; height:34px; font-size:100%;">
+                  <div class="centering-helper in-div"><div class="centering-cell" style="padding-left: 10px;">
+                  (145x100px)
+                  </div>
+                  </div>
+                </div>
+              </div>
+            
+            <button class="btn btn-default footer single" ng-click="reuploadArticleThumbnail()" ng-disabled="formReuploadArticleThumbnail.$invalid"><h3>Upload</h3></button>
+          </div>
+          </form>
+              <!-- <div class="form-group">
+                <label>test upload with simple method to send two files at the same time:</label><input type="file"/>
+              </div> -->
+        </div>
+        <button class="close-dialog-button" data-dismiss="modal"></button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

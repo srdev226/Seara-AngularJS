@@ -1,0 +1,38 @@
+<div class="simple-dialog">
+	<div class="modal fade" id="simpleDialogModal" backdrop="false" >
+		<div class="centering-helper"><div class="centering-cell">
+		<div class="modal-dialog">
+			<div class="modal-content" ng-cloak>
+					<div class="dialog-message">
+						<h3  class="message message-padded">{{simpleDialogMessage}}</h3>
+						<h4 ng-show="simpleDialogDescription" class="message message-padded">{{simpleDialogDescription}}</h4>
+				<button type="button" class="btn btn-default footer single default-focus" ng-click="simpleDialogAction()" data-dismiss="modal"><h3>OK</h3></button>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<!-- <div class="show-loading-spinner" >
+	<div class="modal fade" id="showLoadingModal" backdrop="false">
+			<div class="centering-helper">
+				<div style="width:100px; height:100px;">
+					<div class="loading-spinner"></div>
+				</div>
+			</div>
+	</div>
+</div> -->
+
+<div class="show-loading-spinner" id="showLoadingModal" hidden=true >
+	<div class="centering-helper"><div class="centering-cell">
+		<div class="backdrop"></div>
+		<div style="width:50px; height:50px; margin:auto auto;" class="absolute-center">
+			<div class="loading-spinner"></div>
+		</div>
+	</div>
+</div>
+</div>
+
+

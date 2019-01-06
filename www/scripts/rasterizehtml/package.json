@@ -1,0 +1,63 @@
+{
+  "name": "rasterizehtml",
+  "title": "rasterizeHTML.js",
+  "version": "1.1.0",
+  "description": "Renders HTML into the browser's canvas.",
+  "keywords": [
+    "canvas",
+    "HTML"
+  ],
+  "homepage": "http://www.github.com/cburgmer/rasterizeHTML.js",
+  "bugs": {
+    "url": "https://github.com/cburgmer/rasterizeHTML.js/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Christoph Burgmer",
+    "email": "christoph.burgmer@gmail.com"
+  },
+  "directories": {
+    "lib": "./src/",
+    "example": "./examples/"
+  },
+  "browser": "dist/rasterizeHTML.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cburgmer/rasterizeHTML.js.git"
+  },
+  "dependencies": {
+    "ayepromise": "~1.1.1",
+    "css-mediaquery": "~0.1.2",
+    "inlineresources": "~0.1.1",
+    "url": "~0.10.1",
+    "xmlserializer": "~0.3.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-browserify": "~2.0.7",
+    "grunt-cli": "~0.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-jasmine": "~0.8.2",
+    "grunt-contrib-jshint": "~0.11.0",
+    "grunt-contrib-uglify": "~0.7.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-regex-check": "~0.1.9",
+    "grunt-umd": "~2.3.0",
+    "imagediff": "git://github.com/cburgmer/js-imagediff#v1.1merged",
+    "jasmine-core": "2.2.0",
+    "jquery": "~2.1.0",
+    "slimerjs": "0.9.1-2"
+  },
+  "scripts": {
+    "test": "bash go --verbose"
+  },
+  "readme": "rasterizeHTML.js\n================\n\n<a href=\"https://www.npmjs.org/package/rasterizehtml\">\n    <img src=\"https://badge.fury.io/js/rasterizehtml.svg\"\n        align=\"right\" alt=\"NPM version\" height=\"18\">\n</a>\n\nRenders HTML into the browser's canvas.\n\nSee the [API](https://github.com/cburgmer/rasterizeHTML.js/wiki/API).\n\nInstall\n-------\n\n    $ npm install rasterizehtml\n\nThen include a script tag with `node_modules/rasterizehtml/dist/rasterizeHTML.allinone.js` or require through [browserify](https://github.com/substack/node-browserify).\n\nExample\n-------\n\n```js\nvar canvas = document.getElementById(\"canvas\");\nrasterizeHTML.drawHTML('Some <span style=\"color: green; font-size: 20px;\">HTML</span> with an image <img src=\"someimg.png\" />', canvas);\n```\n\nSee [the examples page](https://github.com/cburgmer/rasterizeHTML.js/wiki/Examples) and [the examples shipped with the code](https://github.com/cburgmer/rasterizeHTML.js/tree/master/examples).\n\nHow does it work\n----------------\n\nFor security reasons rendering HTML into a canvas is severly limited. Firefox offers such a function via `ctx.drawWindow()`, but only with Chrome privileges (see https://developer.mozilla.org/en/Drawing_Graphics_with_Canvas).\n\nAs described in http://robert.ocallahan.org/2011/11/drawing-dom-content-to-canvas.html and https://developer.mozilla.org/en/HTML/Canvas/Drawing_DOM_objects_into_a_canvas however it is possible by embedding the HTML into an SVG image as a `<foreignObject>` and then drawing the resulting image via `ctx.drawImage()`.\n\nIn addition SVG is not allowed to link to external resources and so rasterizeHTML.js will load external images, fonts and stylesheets and store them inline via [data: URIs](http://en.wikipedia.org/wiki/Data_URI_scheme) (or inline style elements respectively).\n\nLimitations\n-----------\n\nAll resources (HTML page, CSS, images, fonts and JS) that are needed for drawing the page can only be loaded if from the [same origin](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Same_origin_policy_for_JavaScript), unless techniques like [CORS](http://enable-cors.org) are used. I.E. `drawURL()` can only load pages from the same domain as the current page and all draw methods can equally only embed styling and images from that domain.\n\nThe code is tested under Firefox, Chrome & Safari. However [IE up to version 11 does not honour `<foreignObject>`](https://status.modern.ie/svgforeignobjectelement) and is unsupported.\n\nAlso the individual browsers still have some issues when rendering SVGs with embedded HTML to the canvas.\n\n[The full list of limitations is here](https://github.com/cburgmer/rasterizeHTML.js/wiki/Limitations).\n\nDevelopment\n-----------\n\nRun `npm install && npm test`. There's also a vagrant image that installs all necessary build dependencies.\n\nFor tests against individual browsers open `test/SpecRunner.html`, for integration tests under Safari open `test/manualIntegrationTestForWebkit.html` (under Chrome you will either need to start the browser passing in the option `--allow-file-access-from-files` or load the page through a local webserver).\n\n[![Build Status](https://travis-ci.org/cburgmer/rasterizeHTML.js.svg?branch=master)](https://travis-ci.org/cburgmer/rasterizeHTML.js)\n\nWhere is it used?\n-----------------\n\n* [CSS Critic](https://github.com/cburgmer/csscritic), a lightweight tool for regression testing of Cascading Style Sheets\n* ...\n\nAuthor\n------\nChristoph Burgmer. Licensed under MIT. Reach out [on Twitter](https://twitter.com/cburgmer).\n",
+  "readmeFilename": "README.md",
+  "_id": "rasterizehtml@1.1.0",
+  "dist": {
+    "shasum": "a02ce36188a5d44754daf7a96f92472ca490e2e5"
+  },
+  "_from": "rasterizehtml@",
+  "_resolved": "https://registry.npmjs.org/rasterizehtml/-/rasterizehtml-1.1.0.tgz"
+}

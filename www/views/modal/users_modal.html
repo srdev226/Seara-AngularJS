@@ -1,0 +1,159 @@
+<!-- Users -->
+<div class="search-user-modal">
+	<div class="modal fade" id="searchUserModal" backdrop="false" >
+		<div class="centering-helper">
+			<div class="centering-cell">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form name="formSearchUser">
+							<div class="dialog-form">
+								<h3 class="header">Search User</h3>
+								<div class="form-group">
+									<input type="text" ng-model="$parent.userSearchText" name="userSearchText" class="form-control" placeholder="enter search term(s)" required/>
+								</div>
+								<button class="btn btn-default footer single" ng-click="searchUser()" data-dismiss="modal" ng-disabled="formSearchUser.$invalid"><h3>Search</h3></button>
+							</div>
+						</form>
+						<button class="close-dialog-button" data-dismiss="modal"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="options">
+	<div class="modal fade" id="userOptionsModal" backdrop="false" >
+		<div class="centering-helper">
+			<div class="centering-cell">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<button class="btn btn-default" ng-click="goToUserActivityLog()" data-dismiss="modal"><h3>View Activity</h3></button>
+						<button class="btn btn-default" ng-click="showEditUserDialog()" data-dismiss="modal" ng-show="canEdit"><h3>Edit User</h3></button>
+						<button class="btn btn-default" ng-click="showConfirmDeleteUserDialog()" data-dismiss="modal" ng-show="canEdit"><h3>Delete User</h3></button>
+						<button class="btn btn-cancel default-focus" data-dismiss="modal"><h3>Cancel</h3></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <confirm-delete id="confirmDeleteUserModal" delete-function="deleteUser()"></confirm-delete> -->
+
+<div class="confirm-delete">
+	<div class="modal fade" id="confirmDeleteUserModal" backdrop="false">
+		<div class="centering-helper">
+			<div class="centering-cell">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="dialog-message">
+							<h3 class="message message-padded">Are you sure  you want to delete ?</h3>
+
+							<div class="clearfix dialog-buttons">
+								<button class="btn btn-default footer half left" data-dismiss="modal" ng-click="deleteUser()" >
+									<h3>DELETE</h3>
+								</button>
+								<button class="btn btn-default footer half right default-focus" data-dismiss="modal">
+									<h3>CANCEL</h3>
+								</button>
+							</div>
+						</div>
+						<button class="close-dialog-button" data-dismiss="modal"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="edit-user-modal">
+	<div class="modal fade" id="editUserModal" backdrop="false" >
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form name="formEditUser">
+							<div class="dialog-form">
+								<h3 class="header">Edit User Detail</h3>
+								<div class="form-group" ng-class="{'has-error': formEditUser.userFirstName.$invalid &amp;&amp; formEditUser.userFirstName.$dirty}">
+									<label>FIRST NAME</label>
+									<input type="text" name="userFirstName" ng-model="selectedUser.first_name" class="form-control" placeholder="enter first name" maxlength=50 required ng-pattern="/^[a-z0-9\s]+$/i"/>
+									<p style="position:absolute;" ng-show="formEditUser.userFirstName.$dirty">
+										{{
+											formEditUser.userFirstName.$error.required? 'First name is required' :
+											formEditUser.userFirstName.$error.pattern? 'First name must be alphabetical characters' : ''
+										}}
+									</p>
+								</div>
+
+								<div class="form-group" ng-class="{'has-error': formEditUser.userLastName.$invalid &amp;&amp; formEditUser.userLastName.$dirty}">
+									<label>LAST NAME</label>
+									<input type="text" name="userLastName" ng-model="selectedUser.last_name" class="form-control" placeholder="enter last name"  maxlength=50 required ng-pattern="/^[a-z0-9\s]+$/i"/>
+									<p style="position:absolute;" ng-show="formEditUser.userLastName.$dirty">
+										{{
+											formEditUser.userLastName.$error.required? 'Last name is required' :
+											formEditUser.userLastName.$error.pattern? 'Last name must be alphabetical characters' : ''
+										}}
+									</p>
+								</div>
+
+								<div class="form-group" ng-class="{'has-error': formEditUser.userJobTitle.$invalid &amp;&amp; formEditUser.userJobTitle.$dirty}">
+									<label>JOB TITLE</label>
+									<input type="text" name="userJobTitle" ng-model="selectedUser.job_title" class="form-control" placeholder="enter job title" maxlength=50 ng-pattern="/^[a-z0-9\s]+$/i"/>
+									<p style="position:absolute;" ng-show="formEditUser.userLastName.$dirty">
+										{{
+											formEditUser.userJobTitle.$error.pattern? 'Cannot use special characters' : ''
+										}}
+									</p>
+								</div>
+
+								<div class="form-group">
+									<label>OFFICE LOCATION</label>
+									<div class="style-select">
+										<div class="select-arrow"></div>
+										<select class="form-control" name="userOfficeLocationId" ng-model="selectedUser.office_location_id" ng-options="officeLocation.id as officeLocation.name for officeLocation in officeLocations">
+											<option value="">Not selected</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group" ng-class="{'has-error': formEditUser.userEmail.$invalid &amp;&amp; formEditUser.userEmail.$dirty}">
+									<label>E-MAIL</label>
+									<input type="text" name="userEmail" ng-model="selectedUser.email" class="form-control" placeholder="enter e-mail address"  maxlength=100 required ng-pattern="/^[^@]+@[^@\.]+\.[^@\.]+$/"/>
+									<p style="position:absolute;" ng-show="formEditUser.userEmail.$dirty">
+										{{
+											formEditUser.userEmail.$error.required? 'E-mail is required' :
+											formEditUser.userEmail.$error.pattern? 'E-mail is not valid' : ''
+										}}
+									</p>
+								</div>
+
+								<div class="form-group">
+									<label>USER TYPE</label>
+									<div class="style-select">
+										<div class="select-arrow"></div>
+										<select class="form-control" name="userGroupId" ng-model="selectedUser.group_id" ng-options="group.id as group.name for group in [{id:1, name:'Admin'}, {id:2, name:'User'}]">
+										</select>
+									</div>
+								</div>
+
+							<!-- 	<div class="form-group">
+									<label>USER TYPE</label>
+									<input type="text" name="userGroupId" ng-model="selectedUser.group_id" class="form-control" placeholder="enter user type"/> -->
+								
+								<div class="clearfix dialog-buttons">
+									<button class="btn btn-default footer half left" ng-click="editUser()" ng-disabled="formEditUser.$invalid" >
+										<h3>Save</h3>
+									</button>
+									<button class="btn btn-default footer half right" data-dismiss="modal">
+										<h3>Cancel</h3>
+									</button>
+								</div>
+
+							</div>
+						
+						</form>
+						</div>
+					<button class="close-dialog-button" data-dismiss="modal"></button>
+				</div>
+	</div>
+</div>

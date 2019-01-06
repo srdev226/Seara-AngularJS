@@ -1,0 +1,55 @@
+<div class="item previous">
+	<a href="{{backLink || '#/management'}}">
+		<button class="btn">Back
+		</button>
+	</a>
+</div>
+
+<div class="activities-index-container">
+	<div class="activities-alert">
+		Showing last 100 activity logs
+	</div>
+	<div class="activities-list-container">
+		<div class="activity-container" ng-repeat="act in activities">
+			<div class="activity-username pull-left">
+				<strong>{{ act.owner_name }}</strong>
+			</div>
+			<div class="activity-timestamp pull-right">
+				{{ act.created_at }}
+			</div>
+			<div class="clearfix"></div>
+			<div class="activity-description">
+				{{ act.description }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="email-activities">
+	<div class="modal fade" id="emailActivitiesModal" backdrop="false">
+		<div class="centering-helper">
+			<div class="centering-cell">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form name="formEmailActivities">
+							<div class="dialog-form">
+								<h3 class="header">Export Activities to Admin</h3>
+								<div class="form-group">
+									<div class="style-select">
+										<div class="select-arrow"></div>
+										<select class="form-control" ng-model="adminId" ng-options="admin.id as admin.email for admin in admins">
+										</select>
+									</div>
+								</div>
+								<button class="btn btn-default footer single" ng-click="emailActivities()">
+									<h3>Send Email</h3>
+								</button>
+							</div>
+						</form>							
+						<button class="close-dialog-button" data-dismiss="modal"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

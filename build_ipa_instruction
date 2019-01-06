@@ -1,0 +1,31 @@
+cordova build ios
+
+in xcode:
+
+  check general for bundle id, version
+  check build settings for code signing and provisioning profile
+
+  Product -> Archive
+
+
+  Window -> Organizer
+
+  in Organizer:
+
+    Export -> Save for Enterprise -> .ipa file created
+
+check the .plist file
+
+upload (scp Seara.ipa bonbon@app.searasports.com:/path/to/Seara.ipa)
+
+********
+
+itms-services is an identifier by which apple/iphone will identify that it should validate the certificate and it should install.
+
+To validate the provisioning profile before installing the ipa file it will connect to "ax.init.itunes.apple.com" and "ocsp.apple.com".
+
+If you are using any intranet connection please check whether these links are accessible or not? if not, you cannot install the application via over the air.
+
+& minimum OS on the device should be 4.0
+
+=> does this mean the app can be installed within local network only with cable?

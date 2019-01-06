@@ -1,0 +1,232 @@
+
+.modal-header {
+  border: none;
+}
+
+.modal-header h3 {
+  text-align: center;
+}
+
+.modal-content {
+  border: none;
+}
+
+.modal-footer {
+  border: none;
+}
+
+.modal-footer.footer-button {
+  padding: 0;
+}
+
+.modal-footer.footer-button .btn.btn-default {
+  border:none;
+  border-top:1px solid white;
+  color:white;
+}
+
+.modal-footer .btn + .btn{
+  margin: 0;
+}
+
+.modal .btn.half {
+  width:50%;
+  float:left;
+  display:inline-block;
+}
+
+.modal .btn.half.left {
+  border-right: 1px solid white !important;
+  border-bottom-left-radius:5px !important;
+}
+
+.modal .btn.half.right {
+  border-bottom-right-radius:5px !important;
+}
+
+.modal .btn.single {
+  border-bottom-left-radius:5px !important;
+  border-bottom-right-radius:5px !important;
+}
+
+.modal-dialog {
+  width: 50%;
+  background-color: #111111;
+  opacity: 1;
+  border: 1px solid;
+  border-color: #993333;
+  border-radius: 5px;
+}
+
+/*
+ * browser modal
+ */
+.browser-dialog .modal-dialog {
+  height:85%;
+ }
+
+.browser-dialog .modal-content {
+  height: 100%;
+}
+
+.browser-dialog .modal-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 53px;
+  bottom: 40px;
+  overflow-y: auto;
+  padding-left: 0;
+}
+
+.browser-dialog .modal-body .item {
+  width:150px;
+  height:170px;
+  margin:  0 0 20px 30px;
+  text-align: center;
+  display:inline-block;
+  cursor:pointer;
+}
+
+.browser-dialog .modal-body .item .icon{
+  width: 100%;
+  height: 120px;
+  display:block;
+  position: relative;
+}
+
+.browser-dialog .modal-footer.footer-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.browser-dialog .modal-dialog{
+  position: relative;
+  width: 1120px;
+  height: 80%;
+}
+@media(max-width: 1280px){
+  .browser-dialog .modal-dialog{
+    width: 940px;
+  }
+}
+@media(max-width: 1024px){
+  .browser-dialog .modal-dialog{
+    width: 760px;
+  }
+}
+@media(max-width: 900px){
+  .browser-dialog .modal-dialog{
+    width: 70%;
+  }
+}
+
+
+.browser-dialog .modal-dialog .container {
+  position:absolute; width:100%; height:100%; top:0; left:0;
+}
+
+/*
+ * asset browser modal
+ */
+.asset-browser-dialog .modal-header .search-box {
+  position: relative;
+}
+
+.asset-browser-dialog .modal-header input.search-input {
+  margin-top: 15px;
+}
+
+.asset-browser-dialog .modal-header .black-search-button {
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: none;
+  background-size: 80%;
+  background-position: center;
+}
+
+.asset-browser-dialog .modal-header .current-folder-name {
+  margin-top: 15px;
+  text-transform: uppercase;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.asset-browser-dialog .modal-header .dialog-previous {
+  background:url(../images/svg/icons/arrow-left_old.svg) center no-repeat;
+  background-size: contain;
+  height: 25px;
+  width: 25px;
+  border: none;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.asset-browser-dialog .modal-header .icon {
+  height: 25px;
+  width: 25px;
+  margin-right: 5px;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.asset-browser-dialog .modal-body.more-header {
+  top: 142px;
+}
+
+.asset-browser-dialog .modal-body .item.asset.dim {
+  opacity: 0.3;
+}
+.asset-browser-dialog .modal-body .item.asset.dim:has(.selected-order) {
+  opacity: 1;
+}
+
+.asset-browser-dialog .modal-body .selected-order {
+  outline: 3px solid #993333;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.asset-browser-dialog .modal-body .selected-order .number{
+  background: #993333;
+  position: absolute;
+  font-weight: bold;
+  right: 5px;
+  bottom: 5px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 20px;
+}
+
+.asset-browser-dialog .modal-footer .selected-amount {
+  background: rgba(40,40,40,0.8);
+  text-align: left;
+  padding: 5px 15px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/*
+ * folder browser modal
+ */
+.folder-browser-dialog .modal-header {
+  padding: 0;
+}
+
+.folder-browser-dialog .modal-header .titlebar .title h2 {
+  line-height: 53px;
+}
+
+.folder-browser-dialog .modal-header .titlebar .item.previous .btn {
+  height: 53px;
+}

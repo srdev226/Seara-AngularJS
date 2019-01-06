@@ -1,0 +1,43 @@
+.notifications-index-container {}
+
+.notifications-index-container .notifications-alert {
+  height: 27px;
+  font-size: 18px;
+  color: black;
+  padding: 2px 0 5px 25px;
+  background: white;
+
+}
+
+.notifications-index-container .notifications-list-container .notification-container {
+  padding: 15px;
+  margin-bottom: 2px;
+  background: linear-gradient(to bottom, rgba(50, 50, 50, .8), rgba(40, 40, 40, .5));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(50, 50, 50, .8)), color-stop(100%, rgba(40, 40, 40, .5)));
+}
+
+.notifications-index-container .notifications-list-container .notification-container {
+  font-size: 17px;
+  overflow: auto;
+  cursor: pointer;
+}
+
+/*
+.notifications-index-container .notifications-list-container .notification-container:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(70, 70, 70, .8)), color-stop(100%, rgba(90, 90, 90, .5)));
+}
+*/
+
+.notifications-index-container .notifications-list-container .notification-container.selected {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(110, 110, 110, .8)), color-stop(100%, rgba(130, 130, 130, .5)));
+}
+
+
+.notifications-index-container .notification-details {
+  text-align: right;
+}
+
+.notifications-index-container .notification-description {
+  margin-right: 134px;
+  word-wrap: break-word;
+}

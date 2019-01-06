@@ -1,0 +1,22 @@
+<div id="slideContainer_{{slideA.index}} {{slideName}}"
+  class="slide-A slide-container" ng-class="slideA.typeClass"
+  ng-swipe-left="nextSlide()" ng-swipe-right="previousSlide()"
+>
+
+  <div class="centering-helper unblocked">
+    <div class="centering-cell" style="text-align: center;">
+
+      <img ng-hide="slideA.index=='end'" id="slideImage_{{slideA.index}}" class=" slide-image slideA-image {{slideA.imageOrientation}}" ng-class="{'with-logo': slideA.index=='cover'}" ng-src="{{ slideA.imageSource }}" alt=""/>
+      
+      <!-- keep text div in one line -->
+      <div ng-show="(slideA.index=='cover') &amp;&amp; showCover" class="presentation-cover-text"><h2>{{ presentation.title }}</h2><p>{{ presentation.description }}</p></div>
+
+      <div ng-show="(slideA.index=='cover') &amp;&amp; showCover" class="presentation-cover-logo">
+        <img ng-src="{{ presentationLogoSource }}"/>
+      </div>
+
+    </div>
+  </div>
+ 
+  <h3 ng-show="slideA.index=='end'">End of Presentation</h3>
+</div>

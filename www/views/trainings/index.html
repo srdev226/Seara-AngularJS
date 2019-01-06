@@ -1,0 +1,35 @@
+<button class="search-button" ng-click="showSearchBar()"></button>
+
+<div class="trainings-index" ng-init="listTrainings()">
+
+<div class="add-training-container" ng-click="showAddTrainingDialog()">
+	<div class="add-training-label-container"><div class="centering-helper in-div"><h1>Add New Training</h1></div></div>
+	<div class="add-training-button">
+		<div class="plus-icon" >
+		</div>
+	</div>
+</div>
+
+
+	<div class="trainings-view">
+		<div class="training-container" ng-repeat="training in trainings" on-touch-begin="trainingMouseDown(training, $index, $event)" on-touch-end="trainingMouseUp(training)" on-touch-move="trainingMouseMove()">
+			<div class="background"></div>
+			<div class="training-detail">
+				<div class="centering-helper in-div">
+					<div class="training-detail-description">
+						<!-- <h3>{{article.title}}</h3><br> -->
+						<h3>{{training.description}}</h3>
+					</div>
+				</div>
+			</div>
+			<div class="training-thumbnail">
+				<img ng-src="{{getThumbnailSource(training.asset_id)}}">
+			</div>
+		</div>
+	</div>
+
+<!--dialogs are here-->
+	<div ng-include src=" 'views/modal/trainings_modal.html' "></div>
+
+</div>
+

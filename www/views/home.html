@@ -1,0 +1,79 @@
+<div class="home-container">
+	<!-- <div class="home-logo"></div> -->
+
+  <div class="home-header">
+    <h1>
+      Notifications
+
+      <div class="refresh-button pull-right">
+        <div ng-click="refresh()"><i class="icon icon-refresh"></i></div>
+      </div>
+
+      <ul class="header-buttons pull-right">
+        <li class="cloud" >
+          <div ng-click="selectCategory('cloud')"><i class="icon icon-cloud"></i></div>
+        </li>
+        <li class="training">
+          <div ng-click="selectCategory('training')"><i class="icon icon-training"></i></div>
+        </li>
+        <li class="news">
+          <div ng-click="selectCategory('news')"><i class="icon icon-news"></i></div>
+        </li>
+        <li class="epub">
+          <div ng-click="selectCategory('epub')"><i class="icon icon-epub"></i></div>
+        </li>
+        <li class="message">
+          <div ng-click="selectCategory('message')"><i class="icon icon-message"></i></div>
+        </li>
+        <li class="all active">
+          <div ng-click="selectCategory('all')"><i class="icon icon-all-notifications"></i></div>
+        </li>
+      </ul>
+
+    </h1>
+
+  </div>
+
+  <div class="home-content">
+    <div class="notification-item" ng-repeat="notification in notifications">
+      <div class="item-category" ng-switch on="notification.category">
+
+        <div class="category-icon">
+          <i class="icon icon-cloud" ng-switch-when="cloud"></i>
+          <i class="icon icon-training" ng-switch-when="training"></i>
+          <i class="icon icon-news" ng-switch-when="news"></i>
+          <i class="icon icon-epub" ng-switch-when="epub"></i>
+          <i class="icon icon-message"  ng-switch-default></i>
+        </div>
+
+        <div class="category-name" ng-switch-when="cloud">Seara Cloud</div>
+        <div class="category-name" ng-switch-when="training">Training</div>
+        <div class="category-name" ng-switch-when="news">News &amp; Updates</div>
+        <div class="category-name" ng-switch-when="epub">E-Publications</div>
+        <div class="category-name" ng-switch-default>Message</div>
+      </div>
+
+      <div class="item-body" ng-class="{ 'with-thumbnail': notification.thumbnailUrl }" ng-click="showContent(notification)">
+        <div class="item-thumbnail" ng-if="notification.thumbnailUrl">
+          <!-- <img src="http://localhost:3001/api/v2/assets/307/thumbnail?auth_token=ty5xdnd7ZRZaVjTAWwVM&0.5473856418393552"> -->
+          <img ng-src="{{notification.thumbnailUrl}}" no-image>
+        </div>
+        <div class="item-creator" ng-if="notification.creator &amp;&amp; notification.category=='message'"><span>{{ notification.creator.name }}</span> said</div>
+        <div class="item-message">
+          <p>
+            {{ notification.description }}
+          </p>
+        </div>
+        <div class="item-date">{{ notification.formatted_published_date }}</div>
+      </div>
+    </div>    
+  </div>
+
+	<div class="home-footer">
+		<h3>Welcome to Seara Sports Systems</h3>
+		<p>Presentation and Media Interface</p>
+	</div>
+
+</div>
+
+<div ng-include="'views/modal/full_image.html'"></div>

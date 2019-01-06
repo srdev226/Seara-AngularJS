@@ -1,0 +1,207 @@
+.home-container {
+  position: absolute;
+  height:100%;
+  width: 100%;  
+}
+
+.home-logo {
+  background-size: contain;
+}
+
+.home-container .home-logo {
+  width: auto;
+  height: 20%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  top: 15%;
+}
+
+.home-container .home-header {
+  border-bottom: 1px solid white;
+  background: black;
+  position: relative;
+}
+
+.home-container .home-header h1 {
+  padding: 30px 100px 30px 30px;
+  font-size: 220%;
+}
+
+.home-container .home-header .refresh-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 94px;
+  width: 94px;
+  background-size: contain;
+  background-position: center;
+  padding:20px;
+}
+
+.home-container .home-header .refresh-button div {
+  height: 100%;
+  width: 100%;
+}
+
+.home-container .home-header .refresh-button div:hover {
+  cursor: pointer;
+}
+
+.home-container .home-header ul {
+  list-style: none;
+}
+
+.home-container .home-header ul li {
+  float: left;
+}
+
+.home-container .home-header ul.header-buttons li div {
+  height: 34px;
+  width: 34px;
+  margin: 0 0 0 30px;
+}
+
+.home-container .home-header ul.header-buttons li div:hover {
+  cursor: pointer;
+}
+
+.home-container .home-header .icon {
+  background-position: center;
+  background-size: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.home-container .home-header ul li .icon {
+  opacity: 0.5;
+}
+
+.home-container .home-header ul li.active .icon {
+  opacity: 1;
+}
+
+.home-container .home-footer h3 {
+  text-transform: none;
+  letter-spacing: 1px;
+}
+
+.home-container .home-footer p {
+  font-size:145%;
+  letter-spacing: 2px;
+  font-weight: none;
+  margin: 0;
+}
+
+
+
+.home-footer {
+  position: absolute;
+  bottom:0;
+  width:100%;
+  padding: 16px;
+  background-color: black;
+  text-align: center;
+  border-top: 4px solid;
+  border-color: #993333;
+}
+
+.home-container .home-content {
+  position: absolute;
+  top: 95px;
+  bottom: 87px;
+  overflow-y: auto;
+  padding: 30px;
+  width: 100%;
+}
+
+.home-container .home-content .notification-item {
+  width: 100%;
+  margin-bottom: 30px;
+  word-wrap: break-word;
+}
+
+.home-container .home-content .notification-item .item-category {
+  padding-bottom: 5px;
+  font-size: 16px;
+}
+
+.home-container .home-content .notification-item .item-category .category-icon {
+  display: inline-block;
+  height: 35px;
+  width: 35px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.home-container .home-content .notification-item .item-category .category-name {
+  display: inline-block;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.home-container .home-content .notification-item .item-category .icon {
+  background-position: center;
+  background-size: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.home-container .home-content .notification-item .item-body {
+  width: 100%;
+  padding: 15px;
+  background: black;
+  border: 1px solid #993333;
+  border-radius: 6px;
+  overflow: auto;
+  position: relative;
+  cursor: pointer;
+}
+
+.home-container .home-content .notification-item .item-body .item-thumbnail {
+  margin-right: 15px;
+  float: left;
+  height: 100px;
+  width: 145px;
+  line-height: 97px;
+  text-align: center;
+  background: #333;
+  /*display: block;*/
+}
+
+/*.home-container .home-content .notification-item .item-body .item-thumbnail:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}*/
+
+.home-container .home-content .notification-item .item-body .item-thumbnail img {
+  display: inline-block;
+  vertical-align: middle;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.home-container .home-content .notification-item .item-body .item-creator {
+  font-weight: bold;
+}
+
+.home-container .home-content .notification-item .item-body .item-message {
+  vertical-align: top;
+}
+
+.home-container .home-content .notification-item .item-body .item-message p {
+  margin-bottom: 30px;
+}
+
+.home-container .home-content .notification-item .item-body .item-date {
+  font-weight: bold;
+  position: absolute;
+  bottom: 15px;
+}
+
+.home-container .home-content .notification-item .item-body.with-thumbnail .item-message,
+.home-container .home-content .notification-item .item-body.with-thumbnail .item-date {
+  margin-left: 175px;
+}

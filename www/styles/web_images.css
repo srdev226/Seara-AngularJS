@@ -1,0 +1,63 @@
+/*images path for iOS*/
+.icon.icon-presentations { background-image:url(../images/svg/icons/sidebar/presentations.svg); }
+.icon.icon-cloud { background-image:url(../images/svg/icons/sidebar/cloud.svg); }
+.icon.icon-favorites { background-image:url(../images/svg/icons/sidebar/favorites.svg); }
+.icon.icon-training { background-image:url(../images/svg/icons/sidebar/training.svg); }
+.icon.icon-news { background-image:url(../images/svg/icons/sidebar/news.svg); }
+.icon.icon-epub { background-image:url(../images/svg/icons/sidebar/epublications.svg); }
+.icon.icon-management { background-image:url(../images/svg/icons/sidebar/management.svg); }
+
+.icon.icon-message { background-image:url(../images/svg/icons/notifications/messages.svg); }
+.icon.icon-all-notifications { background-image:url(../images/svg/icons/notifications/all.svg); }
+.icon.icon-refresh { background-image:url(../images/svg/icons/notifications/reload-red.svg); }
+
+.icon.asset .pdf{ background-image:url(../images/pdf-icon.png); }
+.icon.icon-account {background:url(../images/svg/icons/sidebar/user_online.svg);}	
+.icon.icon-account.user-offline{ background:url(../images/svg/icons/sidebar/user_offline.svg);}
+.slide-list-scroll.left{background:url(../images/svg/icons/arrow-left.svg) center;}
+.slide-list-scroll.right{background:url(../images/svg/icons/arrow-right.svg) center;}
+.dialog-form .style-select .select-arrow{background:url(../images/svg/icons/arrow-down-red.svg) no-repeat center;}
+.icon.previous {background-image:url(../images/svg/folder.svg);}
+.item.previous .btn {background: url(../images/svg/icons/back-button.svg) center no-repeat;}
+.icon.folder {background-image:url(../images/svg/folder.svg); background-size: 100% 100%;}
+.icon.folder.folder-locked {background-image:url(../images/svg/folder-locked.svg); background-size: 100% 100%;}
+.icon.folder-add { background-image:url(../images/svg/folder-add.svg); background-size: 100% 100%;}
+.icon.content-add { background-image:url(../images/svg/asset-add.svg); background-size: 100% 100%;}
+.icon.presentation-slide-add {background:url(../images/svg/icons/asset-add.svg) no-repeat center; background-size: 100% 100%;}
+.presentation-slide-add {background:url(../images/svg/icons/plus-with-gradient.svg) no-repeat center;}
+.icon.asset {background-image:url(../images/svg/asset.svg); background-size: cover;}
+.slide-list .item .transition-button .tran-none{ background:url(../images/svg/icons/transition-white.svg) no-repeat center;}
+
+.slide-list .item .transition-button .tran-fade.tran-slow{ background:url(../images/svg/icons/transition-red.svg) no-repeat center;}
+.slide-list .item .transition-button .tran-fade.tran-medium{ background:url(../images/svg/icons/transition-orange.svg) no-repeat center;}
+.slide-list .item .transition-button .tran-fade.tran-fast{ background:url(../images/svg/icons/transition-green.svg) no-repeat center;}
+
+.slide-list .item .transition-button .tran-zoom.tran-slow{ background:url(../images/svg/icons/transition-red.svg) no-repeat center;}
+.slide-list .item .transition-button .tran-zoom.tran-medium{ background:url(../images/svg/icons/transition-orange.svg) no-repeat center;}
+.slide-list .item .transition-button .tran-zoom.tran-fast{ background:url(../images/svg/icons/transition-green.svg) no-repeat center;}
+
+.slide-list .item .transition-button .tran-move.tran-slow{ background:url(../images/svg/icons/transition-red.svg) no-repeat center;}
+.slide-list .item .transition-button .tran-move.tran-medium{ background:url(../images/svg/icons/transition-orange.svg) no-repeat center;}
+.slide-list .item .transition-button .tran-move.tran-fast{ background:url(../images/svg/icons/transition-green.svg) no-repeat center;}
+
+
+.loading-spinner {background-image:url(../images/loader.gif);}
+.main-content {background:url(../images/bg.png) transparent no-repeat bottom right;}
+.home-logo {background:url(../images/svg/icons/logo.svg) transparent no-repeat center;}
+.close-dialog-button {background:url(../images/svg/icons/close.svg) transparent  no-repeat;}
+.close-dialog-button.white {background:url(../images/svg/icons/close-white.svg) transparent  no-repeat; background-size: contain;}
+
+.editor-full-screen-button {background:url(../images/svg/icons/full-screen.svg) transparent  no-repeat right;}
+.editor-edit-presentation-button {background:url(../images/svg/icons/pencil-edit.svg) transparent  no-repeat right;}
+.search-button { background-image:url(../images/svg/icons/search.svg); }
+.black-search-button {background:url(../images/svg/icons/black-search.svg) transparent  no-repeat right;}
+
+.slide-list-container .presentation-slide-add .plus-icon {background:url(../images/svg/icons/plus-with-gradient.svg) no-repeat center;}
+.news-index .add-article-container .add-article-button .plus-icon {background:url(../images/svg/icons/plus-with-gradient.svg) no-repeat center;}
+.trainings-index .add-training-container .add-training-button .plus-icon {background:url(../images/svg/icons/plus-with-gradient.svg) no-repeat center;}
+.articles-index .add-article-container .add-article-button .plus-icon {background:url(../images/svg/icons/plus-with-gradient.svg) no-repeat center;}
+.add-notification {background-image: url(../images/svg/icons/plus-with-gradient.svg); }
+
+.presentation-editor .show-image { background:url(../images/presentation-editor-bg.png);}
+
+.no-image-selected {background:url(../images/svg/placeholder.svg) no-repeat; background-size:100% 100%;}

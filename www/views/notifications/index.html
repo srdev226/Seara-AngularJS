@@ -1,0 +1,134 @@
+<div class="item previous">
+  <a href="{{backLink || '#/management'}}">
+    <button class="btn">Back
+    </button>
+  </a>
+</div>
+
+<div class="notifications-index-container">
+  <div class="notifications-alert">
+    Showing last 100 notifications
+  </div>
+  <div class="notifications-list-container">
+    <div id="notification{{$index}}" class="notification-container"
+      ng-repeat="notification in notifications"
+      ng-class="{'selected': $index==selectedNotificationIndex}"
+      on-touch-begin="notificationTouchBegin(notification, $index)"
+      on-touch-move="notificationTouchMove()"
+      on-touch-end="notificationTouchEnd()"
+    >
+
+      <div class="notification-details pull-right">
+
+        <div ng-switch on="notification.category">
+          <strong ng-switch-when="cloud">Seara Cloud</strong>
+          <strong ng-switch-when="training">Training</strong>
+          <strong ng-switch-when="news">News</strong>
+          <strong ng-switch-when="epub">E-Publications</strong>
+          <strong ng-switch-default>Message</strong>
+        </div>
+
+        <strong>{{ notification.formatted_published_date }}</strong>
+      </div>
+      <div class="notification-description">
+        <strong ng-if="notification.creator &amp;&amp; notification.category=='message'">{{ notification.creator.name }}</strong>
+        {{ notification.description }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="add-notification">
+  <div class="modal fade" id="addNotificationModal" backdrop="false">
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formAddNotification">
+              <div class="dialog-form">
+                <h3 class="header">Add Manual Notification</h3>
+                <div class="form-group">
+                  <textarea class="form-control" ng-model="newMessage" name="addNotificationMessage" maxlength="220"></textarea>
+                </div>
+                <button class="btn btn-default footer single" ng-click="addNotification()">
+                  <h3>Add</h3>
+                </button>
+              </div>
+            </form>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="edit-notification">
+  <div class="modal fade" id="editNotificationModal" backdrop="false">
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formEditNotification">
+              <div class="dialog-form">
+                <h3 class="header">Edit Notification</h3>
+                <div class="form-group">
+                  <textarea class="form-control" ng-model="selectedNotification.description" name="editNotificationMessage"></textarea>
+                </div>
+                <button class="btn btn-default footer single" ng-click="editNotification()">
+                  <h3>Save</h3>
+                </button>
+              </div>
+            </form>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <confirm-delete id="confirmDeleteUserModal" delete-function="deleteUser()"></confirm-delete> -->
+
+<div class="confirm-delete">
+  <div class="modal fade" id="confirmDeleteNotificationModal" backdrop="false">
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="dialog-message">
+              <h3 class="message message-padded">Are you sure  you want to delete ?</h3>
+
+              <div class="clearfix dialog-buttons">
+                <button class="btn btn-default footer half left" data-dismiss="modal" ng-click="deleteNotification()" >
+                  <h3>DELETE</h3>
+                </button>
+                <button class="btn btn-default footer half right default-focus" data-dismiss="modal">
+                  <h3>CANCEL</h3>
+                </button>
+              </div>
+            </div>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="modal fade" id="notificationOptionsModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <button class="btn btn-default" ng-click="showEditNotificationDialog()" data-dismiss="modal"><h3>Edit Notification</h3></button>
+            <button class="btn btn-default" ng-click="showConfirmDeleteNotificationDialog()" data-dismiss="modal"><h3>Delete Notification</h3></button>
+            <button class="btn btn-cancel default-focus" data-dismiss="modal"><h3>Cancel</h3></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

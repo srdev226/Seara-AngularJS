@@ -1,0 +1,33 @@
+{
+  "name": "angular-dialog-service",
+  "version": "5.1.2",
+  "dependencies": {
+    "angular": "1.2.x",
+    "bootstrap": "3.1.x",
+    "angular-sanitize": "1.2.x",
+    "angular-bootstrap": "0.11.x",
+    "angular-translate": "2.1.x"
+  },
+  "main": [
+    "dialogs.min.css",
+    "dialogs.min.js",
+    "dialogs-default-translations.min.js"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "homepage": "https://github.com/m-e-conroy/angular-dialog-service",
+  "_release": "5.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v5.1.2",
+    "commit": "4251d9d1cf4a7593a5bc550971c71745f29ed9d1"
+  },
+  "_source": "git://github.com/m-e-conroy/angular-dialog-service.git",
+  "_target": "~5.1.2",
+  "_originalSource": "angular-dialog-service",
+  "_direct": true
+}

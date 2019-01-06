@@ -1,0 +1,91 @@
+<div class="presentation-editor" id="presentationEditorContainer" ng-init="setPresentation()" > <!--ng-hide="presentationLoading"-->
+
+  <div class="show-image" on-touch-move="moveHotspot($event)">
+    <div class="centering-helper in-div"><div class="centering-cell" style="text-align: center;" ng-hide="imageSource" >
+      <img src="images/svg/placeholder.svg" class="full-height" />
+    </div>
+  </div>
+
+	<div class="centering-helper in-div" style="z-index:9001;" ng-show="showLoading">
+		<div class="centering-cell" style="text-align: center;">
+    	<div style="width:50px; height:50px; margin:0 auto;">
+      	<div class="loading-spinner"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="centering-helper in-div">
+  	<div class="centering-cell" style="text-align: center;">
+	    <!-- HOTSPOTS
+	    <div id="hotspotBox" class="hotspot-box" ng-show="showHotspot &amp;&amp; selectedPresentationSlide.hotspots_x!=null">
+	      <div class="highlight" on-touch-begin="startDrag('hotspotBox')" ><p style="font-size:110%; font-weight:bold; text-transform: uppercase; display:table-cell; vertical-align:middle;">hotspot</p></div>
+	      <div id="hotspotTL" class="hotspot" style="top:0; left:0;" on-touch-begin="startDrag('hotspotTL')">
+	      	<div class="hotspot-border"></div>
+	      </div>
+	      <div id="hotspotTR" class="hotspot" style="top:0; right:0;" on-touch-begin="startDrag('hotspotTR')">
+	       	<div class="hotspot-border"></div>
+	      </div>  
+	      <div id="hotspotBL" class="hotspot" style="bottom:0; left:0;" on-touch-begin="startDrag('hotspotBL')">
+	      	<div class="hotspot-border"></div>
+	      </div>
+	      <div id="hotspotBR" class="hotspot" style="bottom:0; right:0;" on-touch-begin="startDrag('hotspotBR')">
+	      	<div class="hotspot-border"></div>
+	      </div>
+	    </div>    
+			-->
+	    <img id="previewImage"  ng-show="imageSource" src="{{imageSource}}" class="{{imageOrientation}}" />
+
+	  </div>
+  </div>
+</div>
+
+<div class="slide-list-container">
+    <button class="slide-list-scroll left" on-touch-begin="scrollLeft($event)"></button>
+
+
+
+
+    	<div class="slide-list">
+
+      	<div class="item presentation-slide" id="slideItem{{$index}}" ng-repeat="presentation_slide in list_presentation_slides" >
+          <div class="icon asset" ng-class="{'shake': $index==shakePresentationSlideIndex}">
+            <div class="slide-thumbnail" 
+              on-touch-begin="slideMouseDown($index, $event)"
+              on-touch-end="slideMouseUp($index, $event)" 
+              on-touch-move="slideMouseMove()"
+            >
+              <div id="slideBorder{{$index}}"></div> <!--set selected-slide-border here-->
+              <div class="thumbnail-background" style="position:absolute; width:100%; height:100%; background:black;"></div> <!--set selected-slide-border here-->
+              <img ng-src="{{thumbnailSource[$index]}}" ><br>
+              <div class="slide-position">
+                <label>{{$index+1}}</label>
+              </div>
+            </div>
+            <div class="slide-name" >
+            	<p>{{presentation_slide.name}}</p>
+            </div>
+          </div>
+          
+          <div class="transition-button">
+            <div class="centering-helper in-div">
+	            <div class="centering-cell">
+	               <div class="transition-icon tran-{{presentation_slide.transition_type}} tran-{{presentation_slide.transition_speed}}" 
+	               style="display:inline-block;" on-touch-end="transitionMouseUp($index)"></div>
+	             </div>
+             </div>
+          </div>
+        </div>
+    </div>
+
+    <button class="slide-list-scroll right" on-touch-begin="scrollRight($event)"></button>
+
+    <div class="presentation-slide-add" on-touch-begin="showAddPresentationSlideDialog()">
+      <div class="plus-icon"></div>
+    </div>
+  </div>
+
+</div>
+
+<div ng-include src="'views/modal/presentation_modal.html'"></div>
+<div ng-include src="'views/modal/presentation_viewer_modal.html'"></div>
+

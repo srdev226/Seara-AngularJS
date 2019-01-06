@@ -1,0 +1,273 @@
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+body, html { height:100%; }
+body { background-color:black; color:white; height:100%; }
+
+.outer { height:100%; }
+.outer-row-container { height:100%; }
+
+/**
+ * Bootstrap
+ */
+.no-gutter { margin:0; }
+.no-gutter [class*="col-md"] {
+  padding:0;
+}
+
+
+
+/**
+ * Icons
+ */
+.icon {
+	background:url(/images/svg/cloud.2cd122cf.svg) transparent top left no-repeat; width:150px; height:150px; display:inline-block;
+	background-size:100%;
+}
+
+.icon.previous, 
+	.icon.folder,
+	.icon.folder-add,
+	.icon.content-add,
+	.icon.asset {
+		width:200px; height:160px;
+	}
+
+
+.icon.previous {
+	background-image:url(/images/svg/folder.e1025110.svg);
+}
+.icon.folder {
+	background-image:url(/images/svg/folder.e1025110.svg);
+}
+.icon.folder-add {
+	background-image:url(/images/svg/folder-add.4a9bef70.svg);
+}
+.icon.content-add {
+	background-image:url(/images/svg/asset-add.2e778631.svg);
+}
+.icon.asset {
+	background-image:url(/images/svg/asset.3a7edafd.svg);
+}
+.icon.asset img { width:100%; height:100%;}
+
+
+
+/**
+ * Sidebar
+ */
+aside.main-side { height:100%; }
+aside.main-side header {}
+aside.main-side header img { width:100%; padding:20px 0; padding-left:10%; padding-right:10%; }
+
+aside.main-side nav {}
+aside.main-side nav ul { list-style-type:none; margin:0; padding:0; }
+aside.main-side nav li {  margin:0; padding:0; }
+aside.main-side nav a .icon { width:40px; height:40px; }
+aside.main-side nav a {
+	font-size:150%;
+	display:block; color:white; text-transform:uppercase; padding:5% 0 5% 2%; width:100%;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ba1e2d), color-stop(100%,#831827));
+
+}
+aside.main-side nav .selected a {
+	background: linear-gradient(to bottom, #494848, #262525);
+}
+aside.main-side nav .secondary a {
+	background: linear-gradient(to bottom, #eaeaea, #989696);
+}
+
+aside.main-side nav.main-menu {}
+aside.main-side nav.sub-menu { position:absolute; bottom:0; width:100%; }
+
+
+/**
+ * Main
+ */
+.main-content {
+	height:100%; background:url(/images/bg.47c45474.png) transparent no-repeat bottom right;
+	background-size: 100% auto;
+	background-attachment:fixed;
+}
+
+.titlebar {
+	margin:0 0 0 0;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ba1e2d), color-stop(100%,#831827));
+	/*background: linear-gradient(to bottom, #ba1e2d, #831827);*/
+	text-transform:uppercase;
+	text-align:center;
+	height:5%;
+}
+.titlebar h2 { margin:0; padding:0.6% 0 0 0; }
+
+.main-content .wrapper-content {
+	padding:20px;
+	overflow:auto;
+	height:95%;
+}
+
+
+
+/**
+ * Cloud browser
+ */
+.folders-browser {}
+.folders-browser .item { float:left; margin:0 20px 20px 0; text-align:center; color:white; font-size:2.5rem;}
+.folders-browser .item a  { color:white; font-size:2.5rem; }
+.folders-browser .item .icon { display:block;}
+
+
+input {color: black;}
+button {color: black;}
+
+.btn-default {
+	display:block; 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ba1e2d), color-stop(100%,#831827));
+	/*background: linear-gradient(to bottom, #ba1e2d, #831827); */
+	width: 100%;
+	height: 40px;
+	color:white; 
+	text-transform:uppercase; 
+	padding:5% 0 5% 2%; 
+}
+
+.modal-backdrop {
+	opacity: 0.75;
+}
+
+.modal-dialog {
+	font-size:125%;
+	color:black; 
+	position: absolute;
+	left: 25%;
+	top: 25%;
+}
+
+.folder-options .modal-dialog {
+	width:50%;
+
+}
+
+.confirm-delete-folder .modal-dialog {
+	width: 25%;
+
+}
+
+.show-image .modal-dialog {
+	width: 100%;
+	height: 100%;
+}
+
+.show-image img {
+	position: absolute;
+	margin: 10% 10% 10% 10%;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+
+@-webkit-keyframes spaceboots {
+0% { -webkit-transform: translate(-1px, 0px) rotate(0deg); }
+9% { -webkit-transform: translate(-2px, 0px) rotate(-1deg); }
+18% { -webkit-transform: translate(-3px, 0px) rotate(-2deg); }
+27% { -webkit-transform: translate(-2px, 0px) rotate(-1deg); }
+36% { -webkit-transform: translate(-1px, 0px) rotate(0deg); }
+45% { -webkit-transform: translate(0px, 0px) rotate(0deg); }
+54% { -webkit-transform: translate(1px, 0px) rotate(0deg); }
+63% { -webkit-transform: translate(2px, 0px) rotate(1deg); }
+72% { -webkit-transform: translate(3px, 0px) rotate(2deg); }
+81% { -webkit-transform: translate(2px, 0px) rotate(1deg); }
+90% { -webkit-transform: translate(1px, 0px) rotate(0deg); }
+99% { -webkit-transform: translate(0px, 0px) rotate(0deg); }
+}
+/*.shake:hover,
+	.shake:focus,
+.shake:active {
+
+}*/
+.shake{
+	display:inline-block; 
+	-webkit-animation-name: spaceboots;
+	-webkit-animation-duration: 0.3s;
+	-webkit-transform-origin:50% 50%; /*whats this?*/
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}

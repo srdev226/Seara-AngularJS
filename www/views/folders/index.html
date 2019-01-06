@@ -1,0 +1,74 @@
+<div class="item previous" ng-show="folderData.parentFolder">
+  <a href="#{{prefixPath}}{{folderData.parentFolder.path}}">
+    <button class="btn">Back</button>
+  </a>
+</div>
+
+<div  class="folders-content">
+
+  <div class="search-bar hide">
+    <div class="search-bar-content"><h4 class="search-bar-text">search for: {{searchText}}</h4></div>
+    <button class="close-dialog-button" ng-click="clearSearch()"></button>
+  </div>
+
+  <div class="folders-browser-container">
+    <div class="folders-browser" ng-init="browse()" ng-hide="folderLoading">
+      <div class="item add-folder" ng-show="canEdit &amp;&amp; showAddFolder" ng-click="showAddFolderDialog()">
+        <div class="icon folder-add item-touch-zone"></div>
+        <p>Add New Folder</p>
+      </div>
+
+      <div class="item add-content" ng-show="canEdit &amp;&amp; showAddContent" ng-click="showAddContentDialog()">
+        <div class="icon content-add item-touch-zone"></div>
+        <p>Add New File(s)</p>
+      </div>
+
+      <div class="item add-presentation" ng-show="canEdit &amp;&amp; showAddPresentation &amp;&amp; !searchTextLocal" ng-click="showAddPresentationDialog()">
+        <div class="icon content-add item-touch-zone"></div>
+        <p>Add New Presentations</p>
+      </div>
+
+
+      <div class="item folder"
+        ng-repeat="folder in folderData.folders"
+      >
+        <div
+          class="item-touch-zone"
+          ng-class="{'shake': $index==selectedFolderIconIndex}"
+          on-touch-begin="folderMouseDown(folder, $index, $event)"
+          on-touch-end="folderMouseUp(folder.path, $event)"
+          on-touch-move="folderMouseMove()"
+        >
+
+          <div class="icon folder" ng-class="{'folder-locked': folder.locked}"></div>
+          <p>{{folder.name}}</p>
+        </div>
+      </div>
+
+      <div class="item asset"
+        ng-repeat="asset in folderData.assets | filter:{name: searchTextLocal}"
+      >
+        <div
+          class="item-touch-zone"
+          on-touch-begin="assetMouseDown(asset, $index, $event)"
+          on-touch-end="assetMouseUp(asset, $index, $event)"
+          on-touch-move="assetMouseMove()"
+          ng-class="{'shake': $index==selectedAssetIconIndex}"
+        >
+
+          <div class="icon asset">
+            <img no-image ng-src="{{thumbnailSource[$index]}}" onmousedown="return false;"/><br/>
+            <!-- <div class="glyphicon glyphicon-star" style="position: absolute; top: 5px; left: 5px; color: white;" ng-show="asset.isFavorited"></div> -->
+            <div class="icon-top-right pdf" ng-show="asset.content_type=='pdf'" ng-cloak></div>
+          </div>
+          <p>{{asset.name}}</p>
+        </div>
+      </div>
+
+      <!--dialogs are here-->
+      <div ng-include src=" 'views/modal/folder_modal.html' "></div>
+      <div ng-include src=" 'views/modal/folder_browser_modal.html' "></div>
+      <div ng-include src=" 'views/modal/presentation_viewer_modal.html' "></div>
+    </div>
+  </div>
+</div>

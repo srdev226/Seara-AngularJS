@@ -1,0 +1,240 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>Seara</title>
+
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"> <!-- required for mobile app -->
+
+  <link rel="icon" href="/favicon.png" type="image/png">
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="bower_components/bootstrapvalidator/dist/css/bootstrapValidator.css" type="text/css">
+  <link rel="stylesheet" href="scripts/angular-dialog-service/dialogs.css" type="text/css">
+  <link rel="stylesheet" href="styles/angular.treeview.css" type="text/css">
+  <link rel="stylesheet" href="styles/angular-carousel/angular-carousel.css" type="text/css">
+
+  <link rel="stylesheet" href="styles/web_images.css" type="text/css">
+  <link rel="stylesheet" href="styles/register.css" type="text/css">
+  <link rel="stylesheet" href="styles/style.css" type="text/css">
+  <link rel="stylesheet" href="styles/articles.css" type="text/css">
+  <link rel="stylesheet" href="styles/folders.css" type="text/css">
+  <link rel="stylesheet" href="styles/titlebar.css" type="text/css">
+  <link rel="stylesheet" href="styles/dialogs.css" type="text/css">
+  <link rel="stylesheet" href="styles/users.css" type="text/css">
+  <link rel="stylesheet" href="styles/presentations.css" type="text/css">
+  <link rel="stylesheet" href="styles/activities.css" type="text/css">
+  <link rel="stylesheet" href="styles/notifications.css" type="text/css">
+  <link rel="stylesheet" href="styles/home.css" type="text/css">
+  <link rel="stylesheet" href="styles/account.css" type="text/css">
+
+  <script src="cordova.js" type="text/javascript"></script>
+  <script src="scripts/cordovaInit.js" type="text/javascript"></script>
+
+</head>
+
+<!-- <body ng-app="searaClientApp" ng-cloak> -->
+<body id="searaClientBody" onload="onLoad()">
+  <!-- /////JUST FOR DEBUG///// -->
+  <script>
+    var toggleConsoleLog = function(){
+      var w = document.getElementById('consoleLog').style.width;
+      document.getElementById('consoleLog').style.width = w==='40px'? '50%' : '40px';
+    }
+  </script>
+  <style>
+    #consoleLog {
+      display: none;
+      position: fixed;
+      height: 150px;
+      top: 0;
+      left: 0;
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-size: 15px;
+      z-index: 10000;
+      overflow: auto;
+    }
+  </style>
+  <div style="width: 50%;" id="consoleLog" onmousedown="toggleConsoleLog()">
+  </div>
+  <!-- /////JUST FOR DEBUG///// -->
+
+  <!-- Included common modal -->
+  <div ng-cloak ng-include="&apos;views/modal/common_modal.html&apos;"></div>
+
+  <div ng-cloak class="outer">
+
+    <div class="row outer-row-container no-gutter">
+      <!-- <div class="row outer-row-container"> -->
+      <aside ng-show="showMenu" class="main-side"> 
+        <!-- <aside  ng-show="showMenu" class="menu-column main-side">  -->
+
+        <div class="all-menu">
+          <header>
+            <a href="#"><img class="side-logo" src="images/svg/icons/logo.svg"></a>
+          </header>
+
+          <div class="main-menu-container">
+            <nav class="main-menu">
+              <ul>
+                <li class="{{menuSelected[0]}}" ng-click="goTo(&apos;/presentations/index/root&apos;)">
+                  <div class="menu-button"><i class="icon icon-presentations"></i>Presentations</div>
+                </li>
+                <li class="{{menuSelected[1]}}" ng-click="goTo(&apos;/cloud/index/root&apos;)">
+                  <div class="menu-button"><i class="icon icon-cloud"></i>Seara Cloud</div>
+                </li>
+                <li class="{{menuSelected[2]}}" ng-click="goTo(&apos;/favorites/index/root&apos;)">
+                  <div class="menu-button"><i class="icon icon-favorites"></i>Favorites</div>
+                </li>
+                <li class="{{menuSelected[3]}}" ng-click="goTo(&apos;/trainings&apos;)">
+                  <div class="menu-button"><i class="icon icon-training"></i>Training</div>
+                </li>
+                <li class="{{menuSelected[4]}}" ng-click="goTo(&apos;/news&apos;)">
+                  <div class="menu-button"><i class="icon icon-news"></i>News &amp; Updates</div>
+                </li>
+                <li class="{{menuSelected[5]}}" ng-click="goTo(&apos;/epublications&apos;)">
+                  <div class="menu-button"><i class="icon icon-epub"></i>E-Publications</div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="background-s">
+            <div class="image-s-container">
+              <img src="images/Background S/background-s.svg">
+            </div>
+          </div>
+
+          
+          <nav class="sub-menu">
+            <ul>
+              <li class="syncing" ng-show="syncing">
+                <div>
+                  <i class="icon loading-spinner"></i>Syncing local content
+                </div>
+              </li>
+              <li class="{{menuSelected[6]}}" ng-show="showManagement" ng-click="goTo(&apos;/management&apos;)">
+                <div class="menu-button"><i class="icon icon-management"></i>Management</div>
+              </li>
+              <li class="secondary account-name" ng-class="menuSelected[7]? &apos;selected&apos;:&apos;&apos;" ng-click="goTo(&apos;/account/manage&apos;)">
+                <div class="menu-button">
+                  <i class="icon icon-account" ng-class="isOnline? &apos;&apos;:&apos;user-offline&apos;"></i>
+                  {{currentUserName}}
+                  <!-- <i class="loading-spinner syncing" ng-show="syncing"></i> -->
+                  
+                </div>
+              </li>
+            </ul>
+          </nav>
+
+        </div>
+
+      </aside>
+      <div ng-class="showMenu? &apos;main-content&apos; : &apos;main-content full&apos;">
+        <!-- <div class="main-column main-content"> -->
+        <div class="titlebar-area" ng-show="titleName">
+
+          <div class="titlebar">
+            <div class="centering-helper"><div class="centering-cell">
+              <h2>{{ titleName }}</h2>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="wrapper-content" ng-class="{&apos;with-titlebar&apos; : titleName }">
+          <div ng-view=""></div>
+        </div>
+
+      </div>
+    </div>
+  </div>	
+      
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/json3/lib/json3.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-devise/lib/devise.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+
+  <script src="scripts/ng-file-upload/angular-file-upload.js"></script>
+  <script src="scripts/localforage/dist/localforage.js"></script>
+  <script src="scripts/angular-local-storage/angular-local-storage.js"></script>
+  <script src="scripts/angular-localforage/dist/angular-localForage.js"></script>
+  <script src="scripts/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="scripts/angular-dialog-service/dialogs.js"></script>
+  <script src="scripts/angular-dialog-service/dialogs-default-translations.js"></script>
+  <script src="scripts/angular-translate/angular-translate.js"></script>
+  <script src="scripts/angular-treeview/angular.treeview.js"></script>
+  <script src="scripts/angular-carousel/dist/angular-carousel.js"></script>
+
+  <!-- jsPDF -->
+  <script src="scripts/jsPDF/jspdf.js"></script>
+  <script src="scripts/jsPDF/jspdf.plugin.from_html.js"></script>
+  <script src="scripts/jsPDF/jspdf.plugin.addhtml.js"></script>
+  <script src="scripts/jsPDF/jspdf.plugin.addimage.js"></script>
+  <script src="scripts/jsPDF/jspdf.plugin.split_text_to_size.js"></script>
+  <script src="scripts/jsPDF/jspdf.plugin.standard_fonts_metrics.js"></script>
+  <script src="scripts/jsPDF/jspdf.plugin.png_support.js"></script>
+  <script src="scripts/jsPDF/libs/png_support/png.js"></script>
+  <script src="scripts/jsPDF/libs/png_support/zlib.js"></script>
+  <script src="scripts/jsPDF/libs/FileSaver.js/FileSaver.js"></script>
+  <script src="scripts/rasterizehtml/dist/rasterizeHTML.allinone.js"></script>
+  <!-- -->
+
+  <script src="scripts/app.js"></script>
+  
+  <script src="scripts/controllers/home.js"></script>
+
+  <script src="scripts/controllers/folderCtrl.js"></script>
+  <script src="scripts/controllers/articleCtrl.js"></script>
+  <script src="scripts/controllers/assetBrowserDialog.js"></script>
+  <script src="scripts/controllers/folderBrowserDialog.js"></script>
+  <script src="scripts/controllers/presentations/presentations_index.js"></script>
+  <script src="scripts/controllers/presentations/presentations_edit.js"></script>
+  <script src="scripts/controllers/cloud/cloud_index.js"></script>
+  <script src="scripts/controllers/favorites/favorites_index.js"></script>
+  <script src="scripts/controllers/trainings/trainings_index.js"></script>
+  <script src="scripts/controllers/news/news_index.js"></script>
+  <script src="scripts/controllers/epublications/epublications_index.js"></script>
+  <script src="scripts/controllers/epublications/epublications_category.js"></script>
+  
+  <script src="scripts/controllers/management/management_index.js"></script>
+  <script src="scripts/controllers/users_index.js"></script>
+  <script src="scripts/controllers/users_approve.js"></script>
+  <script src="scripts/controllers/user_activities.js"></script>
+  <script src="scripts/controllers/activities/activities_index.js"></script>
+  <script src="scripts/controllers/notifications/notifications_index.js"></script>
+  <script src="scripts/controllers/login.js"></script>
+  <script src="scripts/controllers/register.js"></script>
+  <script src="scripts/controllers/account_manage.js"></script>
+
+  <script src="scripts/services/globalService.js"></script>
+  <script src="scripts/services/localPathService.js"></script>
+  <script src="scripts/services/serverConfigService.js"></script>
+  <script src="scripts/services/dialogService.js"></script>
+  <script src="scripts/services/loadingMaskService.js"></script>
+  <script src="scripts/services/folderService.js"></script>
+  <script src="scripts/services/authService.js"></script>
+  <script src="scripts/services/presentationService.js"></script>
+  <script src="scripts/services/presentationSyncService.js"></script>
+  <script src="scripts/services/localPresentationSlidesService.js"></script>
+  <script src="scripts/services/localPresentationsService.js"></script>
+  <script src="scripts/services/fileSyncService.js"></script>
+  <script src="scripts/services/connectionService.js"></script>
+  <script src="scripts/services/pdfService.js"></script>
+  
+  <script src="scripts/directives/directives.js"></script>
+
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+
+</body>
+</html>

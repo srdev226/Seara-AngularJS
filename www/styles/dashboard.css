@@ -1,0 +1,101 @@
+body {
+	margin:0;
+	padding:0;
+	height:100%;
+}
+
+.container {
+	width: 100vw;
+	height: 100vh;
+  position:relative;
+}
+.menuContainer {
+	/*width: 200px;*/
+	min-width:15%;
+	height: 100%;
+	float: left;
+	
+}
+
+nav.menu {
+   background-color: #FFad08; width: 100%; height: 100%; 
+}
+nav.menu li {
+	background-color: #999999;
+	margin: 2px;
+	padding: 10px;
+}
+
+nav.menu area {
+	background-color: #777777; margin: 2px; padding: 5px;
+}
+
+.contentContainer {
+	float: left;
+	width: 85%;
+	height: 100%;
+	background-color: #c0c0c0;
+	position:relative;
+	display: inline-block;
+}
+
+.contentContainer header{
+   height: 10%; 
+   background-color: #AA4444;
+   width: 100%;
+}
+/*{ 
+   float: right; width:680px;height: 300px;background-color: #4cad08; 
+}*/
+.contentContainer .middleContainer{
+	display: table;
+	position: relative;
+	top: 0px;
+	background-color: #FF0;
+	width: 100%;
+	height: 80%;
+}
+.contentContainer article{
+	width: 50%;
+	height: 100%;
+	display: table-cell;
+	position: relative;
+  background-color: #c0c0c0;
+  vertical-align: top;
+}
+.contentContainer .imageView{
+	width: 50%;
+	display: table-cell;
+	background-color: #035;
+	position: relative;
+	/*z-index: 10;*/
+}
+
+.contentContainer .imageView img{
+	max-width: 100%;
+	max-height: 100%;
+}
+.contentContainer footer{
+  position: absolute;
+  bottom: 0;
+  /*float: bottom;*/
+  height: 10%; 
+  width: 100%;
+  background-color: #4cadFF;
+}
+
+
+
+
+/**
+ * Cloud files
+ */
+.folders-browser {}
+.folders-browser .item { margin:0 20px 20px 0; float:left; }
+.folders-browser .icon { width:60px; height:60px; background-color:red; }
+.folders-browser .item.add-folder .icon { background-color:purple; }
+.folders-browser .item.previous .icon { background-color:gray; }
+.folders-browser .item.folder .icon { background-color:blue; }
+.folders-browser .item.asset .icon { background-color:green; }
+.folders-browser .item.asset img {width: 60px; height: 60px;}
+.folders-browser .image img { width: auto; height: auto; max-width: 100%; max-height: 100%;}

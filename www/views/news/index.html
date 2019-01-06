@@ -1,0 +1,42 @@
+<button class="search-button" ng-click="showSearchBar()"></button>
+
+<div class="news-index" ng-init="listNews()">
+
+<!-- <a href="#/news/add" ng-show="canEdit" >
+<button class="add-news">
+	ADD NEW ARTICLE
+</button>
+</a> -->
+<div class="add-article-container" ng-click="showAddArticleDialog()">
+	<div class="add-article-text"><div class="centering-helper in-div"><h1>Add New Article</h1></div></div>
+	<div class="add-article-button" >
+		<div class="plus-icon" >
+		</div>
+	</div>
+</div>
+
+
+	<div class="news-view" prevent-right-click>
+		<div class="article-container" ng-repeat="article in news" on-touch-begin="articleMouseDown(article, $index, $event)" on-touch-end="articleMouseUp(article)" on-touch-move="articleMouseMove()">
+			<div class="background"></div>
+			<div class="news-detail">
+				<div class="centering-helper in-div">
+					<div class="news-detail-text">
+					<!-- <h3>{{article.title}}</h3><br> -->
+					<h3>{{article.description}}</h3>
+					<!-- <h4>Added: {{article.published_date}}</h4> -->
+					<h4>{{article.formattedPublishedDate}}</h4>
+				</div>
+				</div>
+			</div>
+			<div class="news-thumbnail">
+				<img ng-src="{{getThumbnailSource(article.asset_id)}}">
+			</div>
+		</div>
+	</div>
+
+<!--dialogs are here-->
+	<div ng-include src=" 'views/modal/news_modal.html' "></div>
+
+</div>
+

@@ -1,0 +1,72 @@
+<div class="container" >
+	<form class="form-register" ng-submit="register()" style="height: 500px;">
+		<h2>REGISTRATION</h2>
+		<div class="form-group">
+			<div class="left-pane">
+				<div>
+					FIRST NAME<br>
+					<input type="text" class="form-control" ng-model="user.first_name">
+				</div>
+
+				<div>
+					JOB TITLE (as on business card)<br>
+					<input type="text" class="form-control" ng-model="user.job_title">
+				</div>
+
+				<div>
+					E-MAIL ADDRESS<br>
+					<input type="email" class="form-control" ng-model="user.email">
+				</div>
+
+				<div>
+					CHOOSE A PASSWORD<br>
+					<input type="password" class="form-control" ng-model="user.password">
+				</div>
+			</div>
+			<div class="right-pane">
+				<div>
+					LAST NAME<br>
+					<input type="text" class="form-control" ng-model="user.last_name">
+				</div>
+
+				<div>
+					OFFICE LOCATION<br>
+					<select class="form-control" ng-model="user.office_location_id" ng-options="officeLocation.id as officeLocation.name for officeLocation in officeLocations"></select>
+				</div>
+
+				<div>
+					REPEAT E-MAIL ADDRESS
+					<input type="email" class="form-control" ng-model="confirmEmail">
+				</div>
+
+				<div>
+					CONFIRM PASSWORD<br>
+					<input type="password" class="form-control" ng-model="confirmPassword">
+				</div>
+			</div>
+			<div>
+				<button type="button" class="btn-default" ng-click="cancel()">CANCEL</button>
+				<button type="submit" class="btn-default">REGISTER</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<!--
+		<div class="form-group">
+			<input type="email" class="form-control" placeholder="e-mail or nickname" ng-model="email">
+			<div class="invalid-email"><div ng-show="true">You entered an invalid e-mail</div></div>
+			<br>
+			<input type="password" class="form-control" placeholder="password" ng-model="password">
+			<br>
+			<div class="checkbox">
+	      	<input type="checkbox"> Keep me logged in
+	  	</div>
+	  	<a class="forgot-password" href="">Forgot Password?</a>
+	  	<a class="register" href="">Register</a>
+			<button class="btn-default btn-lg btn-block">LOGIN</button>
+		</div>
+	</form>	
+</div>
+
+-->

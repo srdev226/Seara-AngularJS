@@ -1,0 +1,186 @@
+
+<div class="account-manage-container">
+
+  <!-- <div class="options-container"> -->
+  <button class="btn btn-default" id="btnSync" ng-click="syncPresentationsAndFavorites()" ng-show="showSyncMenu">
+    <h3>Sync</h3>
+  </button>
+
+  <button class="btn btn-default" id="btnUpdate" ng-click="showEditUserDialog()">
+    <h3>Update Account</h3>
+  </button>
+
+  <button class="btn btn-default" id="btnLogout" ng-click="logout()">
+    <h3>Logout</h3>
+  </button>
+
+  <button ng-if="isSuper &amp;&amp; debugData.supportLocalFileSystem!='no'" class="btn btn-default" id="btnClearLocalFile" ng-click="clearLocalFile()">
+    <h3>Clear Local File</h3>
+  </button>
+  <!-- </div> -->
+
+  <div ng-if="isSuper" class="debug-info">
+    <div class="debug-group">
+      <div class="debug-label">agent</div>
+      <div class="debug-text">{{ debugData.agent }}</div>
+    </div>
+    <div class="debug-group">
+      <div class="debug-label">is tablet</div>
+      <div class="debug-text">{{ debugData.isTablet }}</div>
+
+      <div class="debug-label">cordova</div>
+      <div class="debug-text">{{ debugData.cordova }}</div>
+    </div>
+    <div class="debug-group">
+      <div class="debug-label">save content json to local storage</div>
+      <div class="debug-text">{{ debugData.localJSON }}</div>
+    </div>
+    <div class="debug-group" ng-show="debugData.localJSON">
+      <div class="debug-label">local presentations folder</div>
+      <div class="debug-text fixed-height">{{ jsonLocalPresentationsFolder }}</div>
+
+      <div class="debug-label">local favorites folder</div>
+      <div class="debug-text fixed-height">{{ jsonLocalFavoritesFolder }}</div>
+
+      <div class="debug-label">local asset to presentation</div>
+      <div class="debug-text fixed-height">{{ jsonLocalAssetToPresentation }}</div>
+    </div>
+    
+    <div>
+      <div class="debug-group">
+        <div class="debug-label">save file using local file system</div>
+        <div class="debug-text">{{ debugData.localFile }}</div>
+      </div>
+      <div class="debug-group">
+        <div class="debug-label">API Url</div>
+        <div class="debug-text">{{ debugData.apiUrl }}</div>
+      </div>
+      <div class="debug-group">
+        <div class="debug-label">proxy Url</div>
+        <div class="debug-text">{{ debugData.proxyUrl }}</div>
+      </div>
+      <div class="debug-group">
+        <div class="debug-label">width</div>
+        <div class="debug-text">{{ debugData.width }}</div>
+        <div class="debug-label">height</div>
+        <div class="debug-text">{{ debugData.height }}</div>
+      </div>
+    </div>
+
+    <div class="debug-touch">
+      <div class="debug-label">test touch</div>
+      <div class="debug-touch-area" on-touch-begin="testTouchBegin()" on-touch-move="testTouchMove()" on-touch-end="testTouchEnd()">
+        {{ touchTest || '' }}
+      </div>
+    </div>
+
+    <div class="debug-buttons">
+      <div class="debug-label">Set online status</div>
+      <div class="debug-button set-online-button online" ng-class="{ 'selected': isOnline}" on-touch-begin="forceOnlineStatus(true)">Online</div>
+      <div class="debug-button set-online-button offline" ng-class="{ 'selected': !isOnline}" on-touch-begin="forceOnlineStatus(false)">Offline</div>
+    </div>
+
+    <div class="debug-buttons">
+      <div class="debug-label">Push notifications</div>
+      <!-- <div class="debug-button" ng-click="identifyUser()">Identify user</div> -->
+      <div class="debug-button" ng-click="pushRegister()">Register for push</div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="edit-user-modal">
+  <div class="modal fade" id="editUserModal" backdrop="false" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form name="formEditUser">
+          <div class="dialog-form">
+
+            <h3 class="header">Edit Account Detail</h3>
+
+            <div class="form-group"  ng-class="{'has-error': formEditUser.userFirstName.$invalid &amp;&amp; formEditUser.userFirstName.$dirty}">
+              <label>FIRST NAME</label>
+              <input type="text" name="userFirstName" ng-model="user.first_name" class="form-control" placeholder="enter first name"  maxlength=50 required ng-pattern="/^[a-z0-9\s]+$/i"/>
+              <p style="position:absolute;" ng-show="formEditUser.userFirstName.$dirty">
+                {{
+                  formEditUser.userFirstName.$error.required? 'First name is required' :
+                  formEditUser.userFirstName.$error.pattern? 'First name must be alphabetical characters' : ''
+                }}
+              </p>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': formEditUser.userLastName.$invalid &amp;&amp; formEditUser.userLastName.$dirty}">
+              <label>LAST NAME</label>
+              <input type="text" name="userLastName" ng-model="user.last_name" class="form-control" placeholder="enter last name" maxlength=50 required ng-pattern="/^[a-z0-9\s]+$/i"/>
+              <p style="position:absolute;" ng-show="formEditUser.userLastName.$dirty">
+                {{
+                  formEditUser.userLastName.$error.required? 'Last name is required' :
+                  formEditUser.userLastName.$error.pattern? 'Last name must be alphabetical characters' : ''
+                }}
+              </p>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': formEditUser.userJobTitle.$invalid &amp;&amp; formEditUser.userJobTitle.$dirty}">
+              <label>JOB TITLE</label>
+              <input type="text" name="userJobTitle" ng-model="user.job_title" class="form-control" placeholder="enter job title"  maxlength=50 ng-pattern="/^[a-z0-9\s]+$/i"/>
+              <p style="position:absolute;" ng-show="formEditUser.userJobTitle.$dirty">
+                {{
+                  formEditUser.userJobTitle.$error.pattern? 'Cannot use special characters' : ''
+                }}
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label>OFFICE LOCATION</label>
+              <div class="style-select">
+                <div class="select-arrow"></div>
+                <select class="form-control" style="position:relative;" name="userOfficeLocationId" ng-model="user.office_location_id" ng-options="officeLocation.id as officeLocation.name for officeLocation in officeLocations">
+                  <option value="">Not selected</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group"  ng-class="{'has-error': formEditUser.userEmail.$invalid &amp;&amp; formEditUser.userEmail.$dirty}">
+              <label>E-MAIL</label>
+              <input type="text" name="userEmail" ng-model="user.email" class="form-control" placeholder="enter e-mail address"  maxlength=100 required ng-pattern="/^[^@]+@[^@\.]+\.[^@\.]+$/">
+              <p style="position:absolute;" ng-show="formEditUser.userEmail.$dirty">
+                {{
+                  formEditUser.userEmail.$error.required? 'E-mail is required' :
+                  formEditUser.userEmail.$error.pattern? 'E-mail is not valid' :
+                  emailNotMatch? 'Confirm e-mail does not match' : ''
+                }}
+              </p>
+            </div>
+
+            <div class="form-group" ng-show="canEditUsers">
+              <label>USER TYPE</label>
+              <div class="style-select">
+                <div class="select-arrow"></div>
+                <select class="form-control" style="position:relative;" name="userGroupId" ng-model="user.group_id" ng-options="group.id as group.name for group in [{id:1, name:'Admin'}, {id:2, name:'User'}]">
+                </select>
+              </div>
+            </div>
+
+            <!--
+              <div class="form-group">
+                <label>USER TYPE</label>
+                <input type="text" name="userGroupId" ng-model="user.group_id" class="form-control" placeholder="enter user type"/>
+            -->
+              
+            <div class="clearfix dialog-buttons">
+              <button class="btn btn-default footer half left" ng-click="editUser()" ng-disabled="formEditUser.$invalid" >
+                <h3>Save</h3>
+              </button>
+              <button class="btn btn-default footer half right" data-dismiss="modal">
+              <h3>Cancel</h3>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <button class="close-dialog-button" data-dismiss="modal"></button>
+    </div>
+  </div>
+</div>

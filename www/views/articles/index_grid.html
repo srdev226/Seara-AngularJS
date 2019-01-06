@@ -1,0 +1,50 @@
+<div class="item previous" ng-show="topLeftBackLink">
+		<a href="#/{{topLeftBackLink}}">
+			<button class="btn">Back
+			</button>
+		</a>
+	</div>
+
+<div style="position:absolute; width:100%; height:100%; overflow: hidden;">
+
+<div class="search-bar hide">
+	<div style="width:100%; height:100%; background:white; padding: auto; color:black; display:table; padding-left:5px;"><h4 style="height:100%; display:table-cell; vertical-align:middle;">search for: {{searchText}}</h4></div>
+	<button  style="position:absolute; top:5px; right:5px; padding:0; margin:0; height:24px; width:24px;" class="close-dialog-button" ng-click="clearSearch()"></button>
+</div>
+
+<div class="articles-index" ng-class="{ 'admin-view': isAdmin}" ng-cloak ng-init="listArticles()">
+<div class="add-article-container" ng-click="showAddArticleDialog()" >
+	<div class="add-article-label-container">
+		<div class="centering-helper in-div"><div class="centering-cell" style="text-align: center;"><h1>Add New {{categorySingular || articleType}}</h1></div></div>
+	</div>
+	<div class="add-article-button">
+		<div class="plus-icon" >
+		</div>
+	</div>
+</div>
+
+<div class="articles-grid-view" >
+		<div class="article-container" ng-repeat="article in articles  | filter:{description: searchText}" on-touch-begin="articleMouseDown(article, $index, $event)" on-touch-end="articleMouseUp(article)" on-touch-move="articleMouseMove()">
+			<div ng-class="{'shake': $index==selectedArticleIndexForShaking}">
+				<div style="position:relative; width:160px; height:220px;">
+				<div class="article-thumbnail">
+					<img class="icon asset" no-image ng-src="{{article.thumbnailSource}}"  onmousedown="return false;">
+				</div>
+				<div class="article-detail">
+					<div class="centering-helper in-div"><div class="centering-cell" style="text-align: center;">
+						<div class="article-detail-description">
+							<!-- <h3>{{article.title}}</h3><br> -->
+							<h3>{{article.description}}</h3>
+							<!-- <h4 ng-show="showDate">{{article.formattedPublishedDate}}</h4> -->
+						</div>
+					</div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<!--dialogs are here-->
+	<div ng-include src=" 'views/modal/articles_modal.html' "></div>

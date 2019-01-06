@@ -1,0 +1,22 @@
+.item.previous a {
+  text-decoration:none;
+}
+
+.item.previous .btn {
+  background-size: 85% 85%;
+  width: 90px;
+  height: 5%;
+  color: #831827;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  z-index:1001;
+  position:fixed;
+  top:0;
+  opacity: 0.8;
+  margin-left: 5px;
+}
+
+.item.previous .btn:hover, .item.previous .btn:active {
+  opacity: 1;
+}

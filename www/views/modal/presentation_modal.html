@@ -1,0 +1,273 @@
+<div class="add-presentation-slide">
+  <div class="modal fade" id="addPresentationSlideModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formAddSlide">
+              <div class="dialog-form">
+                <h3 class="header">Add New Slide(s) To Presentation</h3>
+                <button class="close-dialog-button" data-dismiss="modal"></button>
+                
+                <div class="form-group">{{selectedAssetIds.length>0? selectedAssetIds.length+' image(s) selected':'Select image(s)'}}</div>
+                <div class="form-group browse-images">
+                  <button class="btn btn-default" ng-click="showAssetBrowserDialog()">Browse</button>
+                </div>
+
+                <!-- <div class="form-group" ng-class="{'has-error': formAddSlide.slideName.$invalid &amp;&amp; formAddSlide.slideName.$dirty}">
+                  <input type="text" class="form-control" name="slideName" ng-model="presentationSlide.name" placeholder="enter slide name">
+                  <p class="error-text" ng-show="formAddSlide.slideName.$dirty">
+                    {{ }}
+                  </p>
+                </div> -->
+                <!-- 
+                <select class="form-control" ng-model="presentationSlide.asset_id" ng-options="asset.id as asset.name for asset in assets" style="width: 50%;">
+                  <option value="" >--choose--</option>
+                </select>
+                -->
+
+                <div class="form-group">
+                  <div class="style-select">
+                    <div class="select-arrow"></div>
+                    <select class="form-control" ng-model="presentationSlide.transition_type" ng-options="transitionType as transitionType for transitionType in transitionTypes">
+                    </select>
+                  </div>
+                </div>
+                <!-- <div class="form-group" ng-show="presentationSlide.transition_type!='none'">
+                  <div class="style-select">
+                    <div class="select-arrow"></div>
+                    <select class="form-control" ng-model="presentationSlide.transition_speed" ng-options="transitionSpeed as transitionSpeed for transitionSpeed in transitionSpeeds">
+                    </select>
+                  </div>
+                </div> -->
+
+                <div class="form-group transition-speed-buttons">
+                  <div class="transition-speed-button slow" on-touch-begin="setTransitionSpeed(presentationSlide, 'slow')" ng-class="{ 'selected': presentationSlide.transition_speed=='slow' &amp;&amp; presentationSlide.transition_type!='none'}">
+                    <img src="images/svg/icons/slide_speed/slow.svg">
+                    <div>Slow</div>
+                  </div>
+                  <div class="transition-speed-button medium" on-touch-begin="setTransitionSpeed(presentationSlide, 'medium')" ng-class="{ 'selected': presentationSlide.transition_speed=='medium' &amp;&amp; presentationSlide.transition_type!='none'}">
+                    <img src="images/svg/icons/slide_speed/medium.svg">
+                    <div>Medium</div>
+                  </div>
+                  <div class="transition-speed-button fast" on-touch-begin="setTransitionSpeed(presentationSlide, 'fast')" ng-class="{ 'selected': presentationSlide.transition_speed=='fast' &amp;&amp; presentationSlide.transition_type!='none'}">
+                    <img src="images/svg/icons/slide_speed/fast.svg">
+                    <div>Fast</div>
+                  </div>
+                </div>
+
+                <button class="btn btn-default footer single" ng-click="addPresentationSlides()" ng-disabled="selectedAssets.length==0 || formAddSlide.$invalid">
+                  <h3>Create</h3>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>        
+    </div>        
+  </div>        
+</div>      
+
+<div class="options">
+  <div class="modal fade" id="presentationSlideOptionsModal" backdrop="false">
+    <div class="centering-helper"><div class="centering-cell">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <button class="btn btn-default" ng-click="showEditPresentationSlideDialog()" data-dismiss="modal"><h3>Edit Slide</h3></button>
+          <!-- HOTSPOTS
+          <button class="btn btn-default" ng-click="editHotspots()" ng-hide="selectedPresentationSlide.hotspots_x!=null"data-dismiss="modal">
+            <h3>Apply Hotspot</h3>
+          </button>
+          <button  class="btn btn-default" ng-click="deleteHotspots()" ng-show="selectedPresentationSlide.hotspots_x!=null" data-dismiss="modal">
+            <h3>Remove Hotspot</h3>
+          </button>
+          -->
+          <button class="btn btn-default" ng-click="showConfirmDeletePresentationSlideDialog()" data-dismiss="modal">
+            <h3>Delete Slide</h3>
+          </button>
+          <button class="btn btn-cancel default-focus" data-dismiss="modal">
+            <h3>Cancel</h3>
+          </button>
+        </div>
+      </div>    
+    </div>    
+    </div>    
+  </div>    
+</div>    
+
+
+<div class="editor-edit-presentation-dialog">
+  <div class="modal fade" id="editPresentationModal" backdrop="false">
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+
+            <div class="modal-header">
+              <h3>Edit Presentation Cover</h3>
+              <button class="close-dialog-button white"data-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="form-group">
+                <input type="text" ng-model="editPresentationModel.title" name="editPresentationTitle" class="form-control" placeholder="enter presentation title" />
+              </div>
+              <div class="form-group">
+                <textarea ng-model="editPresentationModel.description" name="editPresentationDescription" class="form-control" placeholder="enter presentation description" />
+              </div>
+
+              <div class="form-group">
+                <div class="file-upload-browser" >
+                  <input type="text" ng-disabled="!isOnline || editPresentationModel.removeLogo" ng-model="logoFileName" name="logoFileName" placeholder="upload logo file..."/>
+                  <button ng-disabled="!isOnline || editPresentationModel.removeLogo" class="btn btn-default">Browse...</button>
+                  <input type="file" ng-disabled="!isOnline || editPresentationModel.removeLogo" ng-file-select="onLogoSelect($files)"/>
+                </div>
+                <div class="file-info">
+                  <div class="centering-helper in-div">
+                    <div class="centering-cell" style="padding-left: 10px;">
+                    (180x120 PNG/JPG Format)<br>
+                    max size: 1 MB
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group dialog-form-checkbox" ng-show="editPresentationModel.logo_asset_id">
+                  <input type="checkbox" ng-model="editPresentationModel.removeLogo" ng-disabled="!isOnline">
+                  <label>REMOVE LOGO FROM COVER</label>
+                </div>
+                <p ng-hide="isOnline">Uploading logo is not available in offline mode</p>
+              </div>
+            </div>
+
+            <div class="modal-footer footer-button">
+              <button class="btn btn-default footer single" ng-click="editPresentation()">
+                <h3>Save Changes</h3>
+              </button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="edit-presentation-slide">
+  <div class="modal fade" id="editPresentationSlideModal" backdrop="false">
+    <div class="centering-helper"><div class="centering-cell">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form name="formEditSlide">
+            <div class="dialog-form">
+              <h3 class="header">Edit Slide</h3>
+              <!-- <div class="form-group" ng-class="{'has-error': formEditSlide.slideName.$invalid &amp;&amp; formEditSlide.slideName.$dirty}">
+                <input type="text" class="form-control" name="slideName" ng-model="selectedPresentationSlide.name" placeholder="enter new slide name">
+              </div> -->
+              <div class="form-group">
+                <label style="float:left; text-transform: uppercase;" >Position</label>
+                <div class="style-select" style="display:inline-block; width:50%">
+                  <div class="select-arrow"></div>
+                  <select class="form-control" ng-model="selectedPresentationSlide.position" ng-options="positionObj.position as positionObj.index for positionObj in positionList" >
+                  </select>
+              </div>
+              </div>
+              <!--
+              <div class="show-asset-browser">
+                <input type="text" class="form-control" ng-model="selectedPresentationSlide.asset_name" disabled/>
+                <button class="btn btn-default" ng-click="showAssetBrowserDialog()">Browse...</button>
+              </div>
+              -->
+            <button class="btn btn-default footer single" ng-click="editPresentationSlide()" ng-disabled="formEditSlide.$invalid"><h3>Apply Changes</h3></button>
+            </div>
+          </form>
+          <button class="close-dialog-button" data-dismiss="modal"></button>
+        </div>
+      </div>        
+    </div>        
+    </div>        
+  </div>        
+</div>        
+
+<div class="edit-transition">
+  <div class="modal fade" id="editTransitionModal" backdrop="false">
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formEditTransition">
+              <div class="dialog-form">
+                <h3 class="header">Transition Style</h3>
+                <div class="form-group">
+                  <div class="style-select">
+                    <div class="select-arrow"></div>
+                    <select class="form-control" ng-model="selectedPresentationSlide.transition_type" ng-options="transitionType as transitionType for transitionType in transitionTypes" value="none">
+                    </select>
+                  </div>
+                </div>
+
+<!--                 <div class="form-group" ng-show="selectedPresentationSlide.transition_type!='none'">
+                  <div class="style-select">
+                    <div class="select-arrow"></div>
+                    <select class="form-control" ng-model="selectedPresentationSlide.transition_speed" ng-options="transitionSpeed as transitionSpeed for transitionSpeed in transitionSpeeds" value="none">
+                    </select>
+                  </div>
+                </div>
+ -->
+                <div class="form-group transition-speed-buttons">
+                  <div class="transition-speed-button slow" on-touch-begin="setTransitionSpeed(selectedPresentationSlide, 'slow')" ng-class="{ 'selected': selectedPresentationSlide.transition_speed=='slow' &amp;&amp; selectedPresentationSlide.transition_type!='none'}">
+                    <img src="images/svg/icons/slide_speed/slow.svg">
+                    <div>Slow</div>
+                  </div>
+                  <div class="transition-speed-button medium" on-touch-begin="setTransitionSpeed(selectedPresentationSlide, 'medium')" ng-class="{ 'selected': selectedPresentationSlide.transition_speed=='medium' &amp;&amp; selectedPresentationSlide.transition_type!='none'}">
+                    <img src="images/svg/icons/slide_speed/medium.svg">
+                    <div>Medium</div>
+                  </div>
+                  <div class="transition-speed-button fast" on-touch-begin="setTransitionSpeed(selectedPresentationSlide, 'fast')" ng-class="{ 'selected': selectedPresentationSlide.transition_speed=='fast' &amp;&amp; selectedPresentationSlide.transition_type!='none'}">
+                    <img src="images/svg/icons/slide_speed/fast.svg">
+                    <div>Fast</div>
+                  </div>
+                </div>
+
+                <button class="btn btn-default footer single" ng-click="editTransition()">
+                  <h3>Apply Transition</h3>
+                </button>
+              </div>
+            </form>              
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-delete-presentation-slide">
+  <div class="modal fade" id="confirmDeletePresentationSlideModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="dialog-message">
+              <h3 class="message message-padded" style="line-height:30px;">
+                Are you sure you want to delete this slide?
+              </h3>
+              <div class="clearfix dialog-buttons">
+                <button class="btn btn-default footer half left" ng-click="deletePresentationSlide()" >
+                  <h3>Delete</h3>
+                </button>
+                <button class="btn btn-default footer half right default-focus" data-dismiss="modal">
+                  <h3>Cancel</h3>
+                </button>
+              </div>
+            </div>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-include src="'views/modal/asset_browser_modal.html'"></div>

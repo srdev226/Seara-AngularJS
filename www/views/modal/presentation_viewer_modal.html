@@ -1,0 +1,63 @@
+<div class="presentation-viewer">
+  <div class="modal fade" id="showPresentationViewerModal" backdrop="false">
+
+	  <div class="presentation-viewer-slide black-backdrop" >
+	    <button class="slide-list-scroll left" style="opacity: 0.5; z-index:9991;" on-touch-begin="previousSlide()" ng-hide="currentSlideIndex==0"></button>
+
+      <div class="cache-images-for-web-version">
+        <img ng-repeat="source in slideImageSourceForCache" class="image-cache-{{$index}}" ng-src="{{source}}" width="0px" height="0px">
+      </div>
+      <!-- structure of slideA is the same as slideB, better find a way to use template with local variables -->
+      <!-- #################################### -->
+      <div id="slideContainer_{{slideA.index}}"
+        class="slide-A slide-container" ng-class="slideA.typeClass"
+        ng-swipe-left="nextSlide()" ng-swipe-right="previousSlide()"
+      >
+
+        <div class="centering-helper unblocked">
+          <div class="centering-cell" style="text-align: center;">
+
+            <img ng-hide="slideA.index=='end'" id="slideImage_{{slideA.index}}" class=" slide-image slideA-image {{slideA.imageOrientation}}" ng-class="{'with-logo': slideA.index=='cover'}" ng-src="{{ slideA.imageSource }}" alt=""/>
+
+            <!-- keep text div in one line -->
+            <div ng-show="(slideA.index=='cover') &amp;&amp; showCover" class="presentation-cover-text"><h2>{{ presentation.title }}</h2><p>{{ presentation.description }}</p></div>
+
+            <div ng-show="(slideA.index=='cover') &amp;&amp; showCover &amp;&amp; presentationLogoSource!='//:0'" class="presentation-cover-logo">
+              <img ng-src="{{ presentationLogoSource }}"/>
+            </div>
+
+          </div>
+        </div>
+
+        <h3 ng-show="slideA.index=='end'">End of Presentation</h3>
+      </div>
+      <!-- #################################### -->
+      <div id="slideContainer_{{slideB.index}}"
+        class="slide-B slide-container" ng-class="slideB.typeClass"
+        ng-swipe-left="nextSlide()" ng-swipe-right="previousSlide()"
+      >
+
+        <div class="centering-helper unblocked">
+          <div class="centering-cell" style="text-align: center;">
+
+            <img ng-hide="slideB.index=='end'" id="slideImage_{{slideB.index}}" class=" slide-image slideB-image {{slideB.imageOrientation}}" ng-class="{'with-logo': slideB.index=='cover'}" ng-src="{{ slideB.imageSource }}" alt=""/>
+
+            <!-- keep text div in one line -->
+            <div ng-show="(slideB.index=='cover') &amp;&amp; showCover" class="presentation-cover-text"><h2>{{ presentation.title }}</h2><p>{{ presentation.description }}</p></div>
+            <div ng-show="(slideB.index=='cover') &amp;&amp; showCover &amp;&amp; presentationLogoSource!='//:0'" class="presentation-cover-logo">
+              <img ng-src="{{ presentationLogoSource }}"/>
+            </div>
+
+          </div>
+        </div>
+
+        <h3 ng-show="slideB.index=='end'">End of Presentation</h3>
+      </div>
+      <!-- #################################### -->
+
+
+      <button class="slide-list-scroll right" style="opacity: 0.5; z-index:9991;" on-touch-begin="nextSlide()"></button>
+      <button class="close-dialog-button" style="z-index: 11000;" data-dismiss="modal" on-touch-begin="endSlide()"></button>
+    </div>
+  </div>
+</div>

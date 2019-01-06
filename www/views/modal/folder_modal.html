@@ -1,0 +1,546 @@
+
+<!-- FOLDERS -->
+<div class="search-folder-modal">
+  <div class="modal fade" id="searchFolderModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formSearchFolder">
+              <div class="dialog-form">
+                <h3 class="header">Search</h3>
+                <div class="form-group">
+                  <input type="text" ng-model="$parent.folderSearchText" class="form-control" placeholder="enter search term(s)" required/>
+                </div>
+                <button class="btn btn-default footer single" ng-click="searchFolder()" data-dismiss="modal" ng-disabled="formSearchFolder.$invalid"><h3>Search</h3></button>
+              </div>
+            </form>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="modal fade" id="folderOptionsModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- <button class="btn btn-default" ng-show="!$parent.inFavorites" >Add to favorites</button> -->
+            <button class="btn btn-default" ng-click="showEditFolderDialog()" ng-show="$parent.canEdit">
+              <div class="centering-helper">
+                <div class="centering-cell">
+                  <h3>Rename folder</h3>
+                </div>
+              </div>
+            </button>
+            <button class="btn btn-default" ng-click="showConfirmDeleteFolderDialog()"  ng-show="$parent.canEdit">
+              <div class="centering-helper"><div class="centering-cell">
+                <h3>Delete folder</h3>
+              </div>
+            </div>
+            </button>
+            <button class="btn btn-cancel default-focus" data-dismiss="modal">
+                <div class="centering-helper"><div class="centering-cell">
+                  <h3>Cancel</h3>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="add-folder"> 
+  <div class="modal fade" id="addFolderModal" backdrop="false" >
+    <div class="centering-helper"><div class="centering-cell">
+    <div class="modal-dialog" >
+      <div class="modal-content">
+          <form name="formAddFolder" class="form-add-folder" ng-submit="addFolder()">
+          <div class="dialog-form">
+            <h3 class="header">Add New Folder</h3>
+                <div class="form-group" ng-class="{'has-error': formAddFolder.folderName.$invalid &amp;&amp; formAddFolder.folderName.$dirty}" >
+                  <!--$parent is needed when use ng-include, different scope-->
+                  <input type="text" name="folderName" class="form-control" ng-model="$parent.addFolderName" placeholder="enter folder name" required ng-pattern="/^[0-9a-z\s]*$/i" />
+                  <p style="position:absolute;" ng-show="formAddFolder.folderName.$dirty">
+                    {{
+                      formAddFolder.folderName.$error.required? 'Folder name is required' :
+                      formAddFolder.folderName.$error.pattern? 'Cannot use special characters' : ''
+                    }}
+                  </p>
+                </div>
+            <button type="submit" class="btn btn-default footer single" ng-disabled="formAddFolder.$invalid" >
+              <h3>Create</h3>
+            </button>
+            </div>
+          </form>
+          <button class="close-dialog-button" data-dismiss="modal"></button>
+      </div>
+    </div>
+    </div><!---->
+  </div></div>
+</div>
+
+<div class="edit-folder"> 
+  <div class="modal fade" id="editFolderModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <form name="formRenameFolder" class="form-add-folder" ng-submit="editFolder()">
+                <div class="dialog-form">
+                  <h3 class="header">Rename Folder</h3>
+                    <div class="form-group" ng-class="{'has-error': formRenameFolder.folderName.$invalid &amp;&amp; formRenameFolder.folderName.$dirty}" >
+                      <!--$parent is needed when use ng-include, different scope-->
+                      <input type="text" name="folderName" class="form-control" ng-model="$parent.selectedFolderName" placeholder="enter new folder name" required ng-pattern="/^[0-9a-z\s]*$/i"/>
+                      <p style="position:absolute;" ng-show="formRenameFolder.folderName.$dirty">
+                        {{
+                          formRenameFolder.folderName.$error.required? 'Folder name is required' :
+                          formRenameFolder.folderName.$error.pattern? 'Cannot use special characters' : ''
+                        }}
+                      </p>
+                    </div>
+                <button type="submit" class="btn btn-default footer" ng-disabled="formRenameFolder.$invalid"><h3>Rename</h3></button>
+                </div>
+              </form>
+              <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-delete">
+  <div class="modal fade" id="confirmDeleteFolderModal" backdrop="false" >
+    <div class="centering-helper"><div class="centering-cell">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="dialog-message">
+          <h3 class="message message-padded">Are you sure you want to delete?</h3>
+
+          <div class="clearfix dialog-buttons">
+            <button class="btn btn-default footer half left" ng-click="deleteFolder()">
+              <h3>DELETE</h3>
+            </button>
+            <button class="btn btn-default footer half right default-focus" data-dismiss="modal">
+              <h3>CANCEL</h3>
+            </button>
+          </div>
+
+        </div>
+        <button class="close-dialog-button" data-dismiss="modal"></button>
+        
+      </div>
+    </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- CONTENTS -->
+<div class="options">
+  <div class="modal fade" id="contentOptionsModal" backdrop="false" >
+    <div class="centering-helper"><div class="centering-cell">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div ng-if="!$parent.inFavorites">
+          <button class="btn btn-default" ng-show="!selectedAssetIsFavorited" ng-click="addToFavorites()">
+            <h3>Add To Favorites</h3>
+          </button>
+          <button class="btn btn-default" ng-show="selectedAssetIsFavorited" ng-click="removeFromFavorites()">
+            <h3>Remove From Favorites</h3>
+          </button>
+          <button class="btn btn-default" ng-click="showFolderBrowserDialog()" data-dismiss="modal" ng-show="canEdit">
+            <h3>Move File</h3>
+          </button>
+          <button class="btn btn-default" ng-click="showEditContentDialog()" data-dismiss="modal" ng-show="canEdit">
+            <h3>Rename File</h3>
+          </button>
+          <button class="btn btn-default" ng-click="showReuploadContentDialog()" data-dismiss="modal" ng-show="canEdit">
+            <h3>Reupload File</h3>
+          </button>
+          <button class="btn btn-default" ng-click="showConfirmDeleteAssetDialog()" data-dismiss="modal" ng-show="canEdit">
+            <h3>Delete File</h3>
+          </button>
+        </div>
+        <div ng-if="$parent.inFavorites">
+          <button class="btn btn-default" ng-click="removeFromFavorites()" data-dismiss="modal" >
+            <h3>Remove From Favorites</h3>
+          </button>
+          <button class="btn btn-default" ng-click="showFolderBrowserDialog()" data-dismiss="modal" ng-show="canEdit">
+            <h3>Move File</h3>
+          </button>
+          <button class="btn btn-default" ng-click="showEditContentDialog()" data-dismiss="modal" ng-show="canEdit">
+            <h3>Rename Favorite</h3>
+          </button>
+        </div>
+        <button class="btn btn-cancel" data-dismiss="modal"><h3>Cancel</h3></button>
+      </div>
+    </div></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="confirm-delete">
+  <div class="modal fade" id="confirmDeleteAssetModal" backdrop="false" >
+    <div class="centering-helper"><div class="centering-cell">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="dialog-message">
+            <h3 class="message message-padded">Are you sure you want to delete?</h3>
+              <div class="clearfix dialog-buttons">
+                <button class="btn btn-default footer half left" ng-click="deleteAsset()"><h3>Delete</h3></button>
+                <button class="btn btn-default footer half right default-focus" data-dismiss="modal"><h3>Cancel</h3></button>
+              </div>
+            </div>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="edit-asset">
+  <div class="modal fade" id="editContentModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formEditAsset">
+              <div class="dialog-form">
+                <h3 class="header">Rename File</h3>
+                <div class="form-group" ng-class="{ 'has-error': formEditAsset.editAssetName.$invalid &amp;&amp; formEditAsset.editAssetName.$dirty }">
+                  <input type="text" class="form-control" name="editAssetName" ng-model="$parent.selectedAssetName" required ng-pattern="/^[0-9a-z\s]*$/i">
+                  <p style="position:absolute;" ng-show="formEditAsset.editAssetName.$dirty">
+                    {{
+                      formEditAsset.editAssetName.$error.required? 'File name is required':
+                      formEditAsset.editAssetName.$error.pattern? 'Cannot use special characters': ''
+                    }}
+                  </p>
+                </div>
+                <button class="btn btn-default footer single" ng-click="editAsset()" ng-disabled="formEditAsset.$invalid">
+                  <h3>Rename</h3>
+                </button>
+                <button class="close-dialog-button" data-dismiss="modal"></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-include="'views/modal/full_image.html'"></div>
+
+<div class="add-content">
+  <div class="modal fade" id="addContentModal" backdrop="false" >
+      <div class="centering-helper">
+        <div class="centering-cell">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form name="formAddContent">
+                <div class="dialog-form">
+                  <h3 class="header">Upload New File</h3>
+                  <div class="form-group" ng-class="{'has-error': formAddContent.addContentName.$invalid &amp;&amp; formAddContent.addContentName.$dirty}">
+                    <input type="text" class="form-control" name="addContentName" ng-model="$parent.addContentName" placeholder="enter file name" required/>
+                    <p style="position:absolute;" ng-show="formAddContent.addContentName.$dirty">
+                      {{formAddContent.addContentName.$error.required? 'File name is required': ''}}
+                    </p>
+                  </div>
+                  <div class="control-group" ng-hide="disablePdf">
+                    <label>
+                      <input type="radio" value="image" ng-model="$parent.fileType" ng-change="onChooseImage()" checked />
+                      Image
+                    </label>
+                  <label>
+                    <input type="radio" value="pdf" ng-model="$parent.fileType" ng-change="onChoosePdf()" />
+                    PDF
+                  </label>
+                </div>
+
+                <h3 class="header">Select File</h3>
+
+                <div class="form-group" ng-show="uploadPdfWithThumbnail">
+                  <div class="file-upload-browser">
+                    <input type="text" ng-model="thumbnailName" placeholder="upload preview image..."/>
+                    <button class="btn btn-default">Browse...</button>
+                    <input type="file" name="inputFile" ng-file-select="onThumbnailSelect($files)"/>
+                  </div>
+                  <div class="file-info">
+                    <div class="centering-helper in-div">
+                      <div class="centering-cell">
+                        (160x120px)<br>
+                        max size: {{ maxThumbnailSizeText }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="file-upload-browser" >
+                    <input type="text" ng-model="fileName" placeholder="upload {{uploadPdfWithThumbnail? 'pdf':'image'}} file..."/>
+                    <button class="btn btn-default">Browse...</button>
+                    <input type="file" ng-file-select="onFileSelect($files)"/>
+                  </div>
+                  <div ng-if="!uploadPdfWithThumbnail" class="file-info one-line">
+                    <div class="centering-helper in-div">
+                      <div class="centering-cell">
+                        max size: {{ maxImageSizeText }}
+                      </div>
+                    </div>
+                  </div>
+                  <div ng-if="uploadPdfWithThumbnail" class="file-info">
+                    <div class="centering-helper in-div">
+                      <div class="centering-cell">
+                        (PDF Format)<br>
+                        max size: {{ maxPdfSizeText }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div ng-show="selectedFiles != null">
+                  <div class="sel-file" ng-model="selectedFile">
+                  <!--<img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">-->
+                  <!--<button class="button" ng-click="uploadFile($index)" ng-show="progress[$index] < 0">Start</button>
+                  <span class="progress" ng-show="progress[$index] >= 0">            
+                    <div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
+                  </span>        
+                  <button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>-->
+                  <!-- {{name}} - size: {{size}}B - type: {{type}} -->
+                  </div>
+                </div>
+
+                <div class="form-group checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="$parent.sendNotification"> Send Notification
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn-default footer single" ng-click="addContent()" 
+                ng-disabled="formAddContent.$invalid || !fileName || (uploadPdfWithThumbnail &amp;&amp; !thumbnailName)">
+                  <h3>Upload</h3>
+                </button>
+              </div>
+            </form>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reupload-content">
+  <div class="modal fade" id="reuploadContentModal" backdrop="false" >
+      <div class="centering-helper"><div class="centering-cell">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form name="formReuploadContent">
+        <div class="dialog-form">
+          <h3 class="header">Reupload File</h3>
+
+          <div class="form-group" ng-show="uploadPdfWithThumbnail">
+            <div class="file-upload-browser">
+              <input type="text" ng-model="thumbnailName" placeholder="upload preview image..."/>
+              <button class="btn btn-default">Browse...</button>
+              <input type="file" name="inputFile" ng-file-select="onThumbnailSelect($files)"/>
+            </div>
+            <div class="file-info">
+              <div class="centering-helper in-div">
+                <div class="centering-cell">
+                  (160x120px)<br>
+                  max size: 1 MB
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="file-upload-browser" >
+              <input type="text" ng-model="fileName" placeholder="upload {{uploadPdfWithThumbnail? 'pdf':'image'}} file..."/>
+              <button class="btn btn-default">Browse...</button>
+              <input type="file" ng-file-select="onFileSelect($files)"/>
+            </div>
+            <div ng-if="!uploadPdfWithThumbnail" class="file-info one-line">
+              <div class="centering-helper in-div">
+                <div class="centering-cell">
+                  max size: 2 MB
+                </div>
+              </div>
+            </div>
+            <div ng-if="uploadPdfWithThumbnail" class="file-info">
+              <div class="centering-helper in-div">
+                <div class="centering-cell">
+                  (PDF Format)<br>
+                  max size: 20 MB
+                </div>
+              </div>
+            </div>
+          </div>
+        <div ng-show="selectedFiles != null">
+          <div class="sel-file" ng-model="selectedFile">
+          <!--<img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">-->
+          <!--<button class="button" ng-click="uploadFile($index)" ng-show="progress[$index] < 0">Start</button>
+          <span class="progress" ng-show="progress[$index] >= 0">            
+            <div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
+          </span>        
+          <button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>-->
+          <!-- {{name}} - size: {{size}}B - type: {{type}} -->
+          </div>
+        </div>
+          <button class="btn btn-default footer single" ng-click="reuploadAsset()" ng-disabled="!fileName &amp;&amp; (uploadPdfWithThumbnail &amp;&amp; !thumbnailName)"><h3>Upload</h3></button>
+        </div>
+      </form>
+          <button class="close-dialog-button" data-dismiss="modal"></button>
+      </div>
+    </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- PRESENTATIONS -->
+
+<div class="add-presentation">
+  <div class="modal fade" id="addPresentationModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formAddPresentation" >
+              <div class="dialog-form">
+                <h3 class="header">Add New Presentation</h3>
+                <div class="form-group" ng-class="{'has-error': formAddPresentation.presentationName.$invalid &amp;&amp; formAddPresentation.presentationName.$dirty}">
+                  <input type="text" name="presentationName" class="form-control" ng-model="$parent.addPresentationName" placeholder="enter presentation name" required ng-pattern="/^[0-9a-z\s]*$/i" />
+                  <p style="position:absolute;" ng-show="formAddPresentation.presentationName.$dirty">
+                    {{
+                      formAddPresentation.presentationName.$error.required? 'Presentation name is required':
+                      formAddPresentation.presentationName.$error.pattern? 'Presentation name must be alphabetical characters': ''
+                    }}
+                  </p>
+                </div>
+                <button class="btn btn-default footer single" ng-click="addPresentation()" ng-disabled="formAddPresentation.$invalid">
+                <h3>Create</h3>
+              </button>
+              </div>
+            </form>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="edit-asset">
+  <div class="modal fade" id="editPresentationModal" backdrop="false">
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formEditPresentation">
+              <div class="dialog-form">
+                <h3 class="header">Rename Presentation</h3>
+                <div class="form-group" ng-class="{ 'has-error': formEditPresentation.presentationName.$invalid &amp;&amp; formEditPresentation.presentationName.$dirty }">
+                  <input type="text" class="form-control" name="presentationName" ng-model="$parent.selectedAssetName" placeholder="enter new presentation name" required/>
+                  <p style="position:absolute;" ng-show="formEditPresentation.presentationName.$dirty">
+                    {{formEditPresentation.presentationName.$error.required? 'Presentation name is required': ''}}
+                  </p>
+                </div>
+                <button class="btn btn-default footer single" ng-click="editPresentation()" ng-disabled="formEditPresentation.$invalid"><h3>Rename</h3></button>
+                <button class="close-dialog-button" data-dismiss="modal"></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="options">
+  <div class="modal fade" id="presentationOptionsModal" backdrop="false" >
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <button class="btn btn-default" ng-show="!selectedPresentationIsShared &amp;&amp; canEdit &amp;&amp; selectedPresentationCanShare" ng-click="sharePresentation()">
+              <h3>Share</h3>
+            </button>
+            
+            <button class="btn btn-default" ng-show="selectedPresentationIsShared  &amp;&amp; canEdit &amp;&amp; selectedPresentationCanShare" ng-click="unsharePresentation()">
+              <h3>Unshare</h3>
+            </button>
+            
+            <button class="btn btn-default" ng-click="showEditPresentationDialog()" ng-show="canEdit &amp;&amp; !hideEditMenu">
+              <h3>Rename Presentation</h3>
+            </button>
+            
+            <button class="btn btn-default" ng-click="goToPresentationEditor()" ng-show="canEdit &amp;&amp; !hideEditMenu">
+              <h3>Go to presentation editor</h3>
+            </button>
+            
+            <button ng-if="!disablePdf" class="btn btn-default" ng-click="downloadPresentationPdf()">
+              <h3>Download PDF file</h3>
+            </button>
+
+            <button class="btn btn-default" ng-click="showEmailPresentationDialog()">
+              <h3>Send PDF file by email</h3>
+            </button>
+            
+            <button class="btn btn-default" ng-click="showConfirmDeleteAssetDialog()"  ng-show="canEdit &amp;&amp; !hideEditMenu">
+              <h3>Delete presentation</h3>
+            </button>
+            
+            <button class="btn btn-cancel default-focus" data-dismiss="modal">
+              <h3>Cancel</h3>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--$parent is needed when use ng-include, different scope-->
+<div class="email-presentation"> 
+  <div class="modal fade" id="emailPresentationModal" backdrop="false">
+    <div class="centering-helper">
+      <div class="centering-cell">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form name="formEmailPresentation">
+              <div class="dialog-form">
+                <h3 class="header">Email Presentation PDF</h3>
+                <div class="form-group" ng-class="{ 'has-error': formEmailPresentation.presentationEmail.$invalid &amp;&amp; formEmailPresentation.presentationEmail.$dirty }" >
+                  <input type="email" name="presentationEmail" class="form-control" ng-model="$parent.presentationEmail" placeholder="enter email" required/>
+                  <p style="position:absolute;" ng-show="formEmailPresentation.presentationEmail.$dirty">
+                    {{
+                      formEmailPresentation.presentationEmail.$error.required? 'Email is required' :
+                      formEmailPresentation.presentationEmail.$error.email? 'Email is invalid' : ''
+                    }}
+                  </p>
+                </div>
+                <button type="submit" class="btn btn-default footer" ng-disabled="formEmailPresentation.$invalid" ng-click="emailPresentationPdf()">
+                  <h3>Send email</h3>
+                </button>
+              </div>
+            </form>
+            <button class="close-dialog-button" data-dismiss="modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

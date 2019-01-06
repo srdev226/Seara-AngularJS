@@ -1,0 +1,60 @@
+<!-- <!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+	<body> -->
+		<div class='container'  ng-controller='DashboardCtrl'>
+			<div class='menuContainer'>
+				<nav class='menu'>
+					<a href='/'>Seara</a>
+						<li><a ng-click="showPresentations()">Presentation</a></li>
+						<li><a ng-click="showCloud()">Seara Cloud</a></li>
+						<li><a ng-click='showFavorites()'>Favorites</a></li>
+						<li><a ng-click='showTrainings()'>Training</a></li>
+						<li><a ng-click='showNews()'>News & Updates</a></li>
+						<li><a ng-click='showEPublications()'>E-Publication</a></li>
+						<li><a ng-click='showManagement()'>Management</a></li>
+						
+				</nav> 
+			</div>
+
+			<div class='contentContainer'>
+				<header>menu: {{menu}}<br>{{status}}</header>
+				<div class="middleContainer">
+					<article>
+						<div ng-switch on="menu">
+							<!-- <div ng-switch-when="presentations">
+								<ul ng-repeat="presentation in data">
+									<li>{{presentation.name}}</li>
+								</ul>
+							</div>
+							<div ng-switch-when="contents"> -->
+								Current: {{data.current.name}}<br>
+								Parent: 
+								<a ng-click="showFolder(data.parent.id)">
+									{{data.parent.name}}
+								</a><br>
+								Folders:
+								<ul ng-repeat="folder in data.folders">
+									<li><a ng-click="showFolder(folder.id)">
+									{{folder.name+folder.id}}</a></li>
+								</ul>
+								Files
+								<ul ng-repeat="asset in data.assets">
+									<li><a ng-click="showImage(asset)">
+									{{asset.name}}</a></li>
+								</ul>
+							<!-- </div> -->
+						</div>
+					</article>
+					<div class='imageView' ng-show="show">
+									<a ng-click="hideImage()"><img ng-src="{{imageSource}}"></a>
+					</div>
+				</div>
+				<footer>{{data.current_user}}</footer>
+			</div>
+		</div>
+<!-- 	</body>
+</html>
+ -->

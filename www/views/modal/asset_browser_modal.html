@@ -1,0 +1,65 @@
+<div class="browser-dialog asset-browser-dialog">
+	<div class="modal fade" id="assetBrowserModal" backdrop="false">
+		<div class="centering-helper">
+			<div class="centering-cell">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+
+						<div class="modal-header">
+							<h3>{{fixedDialogTitleName || dialogTitleName || ''}}</h3>
+							<button class="close-dialog-button white" data-dismiss="modal"></button>
+							<div class="search-box">
+								<form ng-submit="searchFolder()">
+								<input ng-hide="selectCloudOrFavorites" type="text" ng-model="$parent.$parent.searchText" name="searchText" class="form-control search-input" placeholder="enter search term(s)" />
+								<button ng-hide="selectCloudOrFavorites" class="black-search-button" ng-click="searchFolder()"></button>
+								</form>
+							</div>
+
+
+							<div ng-hide="selectCloudOrFavorites" class="current-folder-name">
+								<button class="dialog-previous" on-touch-begin="browse(backPath)"></button>
+								<i ng-show="folderType=='cloud'" class="icon icon-cloud"></i>
+								<i ng-show="folderType=='favorites'" class="icon icon-favorites"></i>
+								{{ currentFolderName }}
+							</div>
+						</div>
+
+
+						<div class="modal-body" ng-class="{'more-header': !selectCloudOrFavorites}">
+
+
+							<div class="item folder" ng-repeat="folder in folderData.folders" on-touch-begin="browse(folder.path)">
+									<div class="icon folder"></div>
+									<p>{{folder.name}}</p>
+							</div>
+							<div class="item asset" ng-repeat="asset in folderData.assets" on-touch-begin="selectAsset(asset)" ng-class="{'dim': tempMultipleAssets.length>=maxSlides &amp;&amp; !asset.selectedOrder}">
+								<div>
+									<div class="icon asset">
+										<img no-image ng-src="{{asset.thumbnailSource}}"/>
+										<div class="selected-order" ng-if="asset.selectedOrder">
+											<div class="number">{{ asset.selectedOrder }}</div>
+										</div>
+									</div>
+									<p>{{asset.name}}</p>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="modal-footer footer-button">
+							<div class="selected-amount" ng-show="tempMultipleAssets.length">{{ tempMultipleAssets.length }} Selected <span ng-show="tempMultipleAssets.length>=maxSlides">(max)</span></div>
+							<button class="btn btn-default footer half left" on-touch-begin="confirmAssets()">
+								<h3>Add</h3>
+							</button>
+							<button class="btn btn-default footer half right" data-dismiss="modal">
+								<h3>Cancel</h3>
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
